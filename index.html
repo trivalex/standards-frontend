@@ -10,15 +10,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="generator" content="PWA Starter Kit">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>Shell app</title>
-    <meta name="description" content="SHELL-app description">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="PWA Starter Kit">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <!--
+  <title>Shell app</title>
+  <meta name="description" content="SHELL-app description">
+
+  <!--
       The `<base>` tag below is present to support two advanced deployment options:
       1) Differential serving. 2) Serving from a non-root path.
 
@@ -26,107 +27,138 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
     -->
-    <base href="/">
+  <base href="/">
 
-    <link rel="icon" href="images/favicon.ico">
+  <link rel="icon" href="images/favicon.ico">
 
-    <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="manifest.json">
+  <!-- See https://goo.gl/OOhYW5 -->
+  <link rel="manifest" href="manifest.json">
 
-    <!-- See https://goo.gl/qRE0vM -->
-    <meta name="theme-color" content="#3f51b5">
+  <!-- See https://goo.gl/qRE0vM -->
+  <meta name="theme-color" content="#3f51b5">
 
-    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="SHELL-app">
+  <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="SHELL-app">
 
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SHELL-app">
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SHELL-app">
 
-    <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+  <!-- Homescreen icons -->
+  <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
 
-    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#3f51b5">
-    <meta name="msapplication-tap-highlight" content="no">
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#3f51b5">
+  <meta name="msapplication-tap-highlight" content="no">
 
-    <!-- Default twitter cards -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@username">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="shell-app">
-    <meta property="og:image" content="images/manifest/icon-144x144.png" />
+  <!-- Default twitter cards -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@username">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="shell-app">
+  <meta property="og:image" content="images/manifest/icon-144x144.png" />
 
-    <script>
-      // Load and register pre-caching Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('service-worker.js', {
-            scope: '/',
-          });
+  <script>
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: '/',
         });
-      }
+      });
+    }
 
-      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
-      // https://github.com/reactjs/redux/issues/2907
-      window.process = { env: { NODE_ENV: 'production' } };
-    </script>
+    // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+    // https://github.com/reactjs/redux/issues/2907
+    window.process = {
+      env: {
+        NODE_ENV: 'production'
+      }
+    };
+    window.dynamicCSS =`
+html {
+  --blue: #00a5ff;
+  --glass-blue: rgba(0, 165, 255, 0.2);
+  --milk-blue: rgba(0, 165, 255, 0.7);
+  --white: #fff;
+  --glass-white: rgba(255, 255, 255, 0.2);
+  --milk-white: rgba(255, 255, 255, 0.9);
+  --grey: #333;
+  --white: #FFF;
+  --glass-grey: rgba(51, 51, 51, 0.2);
+  --milk-grey: rgba(51, 51, 51, 0.75);
+  --view-primary-color: rgba(0, 165, 255, 1);
+  --view-secondary-color: var(--milk-white);
+  --view-tetiary-color: rgb(0, 100, 185);
+  --view-primary-glass-color: rgba(0, 165, 255, 0.9);
+  --view-secondary-glass-color: var(--milk-white);
+  --view-tetiary-glass-color: rgba(0, 100, 185, 0.4);
+  
+  --suggest-color: rgb(50, 255, 75);
+  --notify-color: rgb(255, 255, 75);
+  --warn-color: rgb(255, 150, 75);
+  --critical-color: rgb(255, 75, 75);
 
-    <!-- Add any global styles for body, document, etc. -->
-    <style>
-      @font-face {
-        font-family: 'Pacifico';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
-      }
+  --viewport-xsmall: 320px;
+  --viewport-small: 512px;
+  --viewport-medium: 768px;
+  --viewport-large: 1200px;
+  --viewport-xlarge: 1800px;
+  --content-margin: var(--gutter-default);
+  --content-padding: var(--gutter-default);
+  --notification-min-height: 48px;
+  --notification-height: 48px;
+  --notification-max-height: 48px;
+  --icon-size: 40px;
+  --gutter-half: 8px;
+  --gutter-default: 16px;
+  --gutter-double: 32px;
+  --indent-one: 16px;
+  --indent-two: 42px;
+  --indent-three: 56px;
+}
+`;
 
-      html {
-    --blue: #00a5ff;
-    --glass-blue: rgba(0, 165, 255, 0.2);
-    --milk-blue: rgba(0, 165, 255, 0.7);
-    --white: #fff;
-    --glass-white: rgba(255, 255, 255, 0.2);
-    --milk-white: rgba(255, 255, 255, 0.9);
-    --grey: #333;
-    --white: #FFF;
-    --glass-grey: rgba(51, 51, 51, 0.2);
-    --milk-grey: rgba(51, 51, 51, 0.75);
-    --view-primary-color: rgba(0, 165, 255, 1);
-    --view-secondary-color: var(--milk-white);
-    --view-tetiary-color: rgb(0, 100, 185);
-    --view-primary-glass-color: rgba(0, 165, 255, 0.9);
-    --view-secondary-glass-color: var(--milk-white);
-    --view-tetiary-glass-color: rgba(0, 100, 185, 0.4);
-    --suggest-color: rgb(50, 255, 75);
-    --notify-color: rgb(255, 255, 75);
-    --warn-color: rgb(255, 150, 75);
-    --critical-color: rgb(255, 75, 75);
-      }
-      body {
-        margin: 0;
-        /* This is a font-stack that tries to use the system-default sans-serifs first */
-        font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-        line-height: 1.5;
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
-        background: var(--grey);
-      }
-    </style>
-  </head>
-  <body>
-    <shell-app></shell-app>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script type="module" src="src/infra/shell-app.js" crossorigin></script>
-  </body>
+    window.dynamicStyleTag = document.createElement('style')
+    document.head.append(window.dynamicStyleTag)
+    window.dynamicStyleTag.innerHTML = window.dynamicCSS;
+  </script>
+
+  <!-- Add any global styles for body, document, etc. -->
+  <style>
+    @font-face {
+      font-family: 'Pacifico';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
+    }
+
+    body {
+      margin: 0;
+      /* This is a font-stack that tries to use the system-default sans-serifs first */
+      font-family: Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background: var(--grey);
+    }
+  </style>
+</head>
+
+<body>
+  <shell-app></shell-app>
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="src/infra/shell-app.js" crossorigin></script>
+</body>
+
 </html>

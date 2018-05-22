@@ -6,6 +6,12 @@
   ],
   "extraDependencies": [
     "manifest.json",
+    "design/theme.js",
+    "design/512px.js",
+    "design/768px.js",
+    "design/1200px.js",
+    "design/1800px.js",
+    "design/maxPx.js",
     "node_modules/@webcomponents/webcomponentsjs/**",
     "push-manifest.json"
   ],

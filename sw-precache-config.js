@@ -21,6 +21,10 @@ module.exports = {
       handler: 'fastest'
     },
     {
+      urlPattern: /\/design\/themejs\//,
+      handler: 'fastest'
+    },
+    {
       urlPattern: /^https:\/\/fonts.gstatic.com\//,
       handler: 'fastest'
     }

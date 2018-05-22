@@ -8,9 +8,6 @@ import {
 import {
     FlattenedNodesObserver
 } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-/**
- * Represents a inter
- */
 class UiManager extends Dependant(LitElement) {
     _render() {
         return html`
@@ -30,10 +27,6 @@ class UiManager extends Dependant(LitElement) {
     _wireDependencies() {
         this.routingService = this._wireDependency(this.routingService, "routing-service");
     }
-
-    // static get properties() {
-    //     return {};
-    // }
 
     connectedCallback() {
         super.connectedCallback();

@@ -1,0 +1,19 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "build/esm-bundled",
+    "rewrites": [{
+      "source": "/",
+      "destination": "/index.html"
+    }],
+    "headers": [{
+      "source": "/",
+      "headers": [{
+        "key": "Link",
+        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,</src/infra/shell-app.js>;rel=preload;as=script,</src/infra/ui/ui-root.js>;rel=preload;as=script,</src/components/initial-view.js>;rel=preload;as=script,</src/infra/dependency-resolver/dependency-resolver.js>;rel=preload;as=script,</src/infra/routing/routing-service.js>;rel=preload;as=script"
+      }]
+    }]
+  }
+}

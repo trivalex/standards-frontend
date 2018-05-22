@@ -2,31 +2,8 @@ import {
     LitElement,
     html
 } from '@polymer/lit-element';
-import {
-    installMediaQueryWatcher
-} from 'pwa-helpers/media-query.js';
-
-import './ui-manager.js';
-import '@polymer/app-layout/app-drawer/app-drawer.js';
-import '@polymer/app-layout/app-header/app-header.js';
-import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
-import '@polymer/app-layout/app-toolbar/app-toolbar.js';
-// import {
-//     menuIcon
-// } from '../../components/my-icons.js';
-// import '../../components/snack-bar.js';
-import {
-    ShellAppTheme
-} from '../../../design/theme.js';
-import '../../components/bits-animation.js';
-import '../../components/initial-view.js';
-
-/**
- * Component platform for components that deal with visual context, or enrich the browsers render tree.
- */
 class UiRoot extends LitElement {
     _render() {
-        // Anything that's related to rendering should be done in here.
         return html `
 <style>
     :host {
@@ -40,8 +17,6 @@ class UiRoot extends LitElement {
         height: 100vh;
 
         background-color: var(--app-tertiary-color);
-
-        ${ShellAppTheme}
     }
 
     :host> ::slotted(*) {
@@ -67,12 +42,9 @@ class UiRoot extends LitElement {
 <bits-animation justAnimate duration="1000" maxBitsCount=20></bits-animation>
 <initial-view justAnimate></initial-view>
 <ui-manager id="ui-manager">
-    <!-- Header -->
-    <!-- This gets hidden on a small screen-->
     <nav class="toolbar-list">
     </nav>
 
-    <!-- Drawer content -->
     <nav class="drawer-list">
     </nav>
 
@@ -80,7 +52,6 @@ class UiRoot extends LitElement {
     </slot>
 
     <footer>
-    <!-- <p>Made with &lt;3 by the Polymer team.</p> -->
     </footer>
 </ui-manager>
     `;
@@ -95,36 +66,11 @@ class UiRoot extends LitElement {
     }
 
     _firstRendered() {
-        // var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        // var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
         /* jshint ignore:start */
-        // installMediaQueryWatcher(`(min-width: ${MAX_VH_512PX}px)`,
-        //     (matches) =>
-        //     this.dynamicTheme = importDynamicStyle("../../../design/max512px.js"));
-        //     // import("../../../design/max512px.js").then(() => { this.dynamicTheme = importDynamicStyle}));
-
-        // installMediaQueryWatcher(`(max-width: ${MAX_VH_768PX}px)`,
-        //     (matches) =>
-        //     this.dynamicTheme = importDynamicStyle("../../../design/max768px.js"));
-        //     // import("../../../design/max768px.js").then(() => {this.dynamicTheme = max768px}));
-
-        // installMediaQueryWatcher(`(max-width: ${MAX_VH_1200PX}px)`,
-        //     (matches) =>
-        //     this.dynamicTheme = importDynamicStyle("../../../design/max1200px.js"));
-        //     // import("../../../design/max1200px.js").then(() => {this.dynamicTheme = max1200px}));
-
-        // installMediaQueryWatcher(`(max-width: ${MAX_VH_1800PX}px)`,
-        //     (matches) =>
-        //     this.dynamicTheme = importDynamicStyle("../../../design/max1800px.js"));
-        //     // import("../../../design/max1800px.js").then(() => {this.dynamicTheme = max1800px}));
-
-        // installMediaQueryWatcher(`(max-width: ${MAX_VH_MAXPX}px)`,
-        //     (matches) =>
-        //     this.dynamicTheme = importDynamicStyle("../../../design/maxPx.js"));
-        //     // import("../../../design/maxPx.js").then(() => {this.dynamicTheme = maxPx}));
-
-        import('./ui-manager.js').then(() => {});
+        import('../../components/initial-view.js').then(() => {
+            import('../../components/bits-animation.js');
+            import('./ui-manager.js').then(() => {});
+        });
         /* jshint ignore:end */
     }
 }
