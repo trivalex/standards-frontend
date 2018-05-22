@@ -23,6 +23,7 @@
     "@polymer/app-layout": "^3.0.0-pre.19",
     "@polymer/lit-element": "^0.5.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "animejs": "^2.2.0",
     "pwa-helpers": "^0.8.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
@@ -39,6 +40,7 @@
     "puppeteer": "^1.4.0",
     "renamer": "^0.6.1",
     "replace": "^1.0.0",
-    "wct-browser-legacy": "^1.0.1"
+    "wct-browser-legacy": "^1.0.1",
+    "wct-headless": "^2.2.2"
   }
 }

@@ -8,9 +8,12 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { LitElement } from '@polymer/lit-element';
+import {
+  LitElement
+} from '@polymer/lit-element';
+import { UiRoutable } from "../infra/ui/UiRoutable.js";
 
-export class PageViewElement extends LitElement {
+export class PageViewElement extends UiRoutable(LitElement) {
   // Only render this page if it's actually visible.
   _shouldRender(props, changedProps, old) {
     return props.active;
@@ -19,6 +22,6 @@ export class PageViewElement extends LitElement {
   static get properties() {
     return {
       active: Boolean
-    }
+    };
   }
 }

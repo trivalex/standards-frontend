@@ -15,8 +15,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="generator" content="PWA Starter Kit">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>My app</title>
-    <meta name="description" content="My App description">
+    <title>Shell app</title>
+    <meta name="description" content="SHELL-app description">
 
     <!--
       The `<base>` tag below is present to support two advanced deployment options:
@@ -38,12 +38,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="My App">
+    <meta name="application-name" content="SHELL-app">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="My App">
+    <meta name="apple-mobile-web-app-title" content="SHELL-app">
 
     <!-- Homescreen icons -->
     <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
@@ -61,7 +61,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@username">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="my-app">
+    <meta property="og:site_name" content="shell-app">
     <meta property="og:image" content="images/manifest/icon-144x144.png" />
 
     <script>
@@ -87,6 +87,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-weight: 400;
         src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
       }
+
+      html {
+    --blue: #00a5ff;
+    --glass-blue: rgba(0, 165, 255, 0.2);
+    --milk-blue: rgba(0, 165, 255, 0.7);
+    --white: #fff;
+    --glass-white: rgba(255, 255, 255, 0.2);
+    --milk-white: rgba(255, 255, 255, 0.9);
+    --grey: #333;
+    --white: #FFF;
+    --glass-grey: rgba(51, 51, 51, 0.2);
+    --milk-grey: rgba(51, 51, 51, 0.75);
+    --view-primary-color: rgba(0, 165, 255, 1);
+    --view-secondary-color: var(--milk-white);
+    --view-tetiary-color: rgb(0, 100, 185);
+    --view-primary-glass-color: rgba(0, 165, 255, 0.9);
+    --view-secondary-glass-color: var(--milk-white);
+    --view-tetiary-glass-color: rgba(0, 100, 185, 0.4);
+    --suggest-color: rgb(50, 255, 75);
+    --notify-color: rgb(255, 255, 75);
+    --warn-color: rgb(255, 150, 75);
+    --critical-color: rgb(255, 75, 75);
+      }
       body {
         margin: 0;
         /* This is a font-stack that tries to use the system-default sans-serifs first */
@@ -94,17 +117,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         line-height: 1.5;
         min-height: 100vh;
         -webkit-font-smoothing: antialiased;
+        background: var(--grey);
       }
     </style>
   </head>
   <body>
-    <my-app appTitle="my app"></my-app>
+    <shell-app></shell-app>
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
     <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <!-- Built with love using PWA Starter Kit -->
-    <script type="module" src="src/components/my-app.js" crossorigin></script>
+    <script type="module" src="src/infra/shell-app.js" crossorigin></script>
   </body>
 </html>
