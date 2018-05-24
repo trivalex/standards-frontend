@@ -1,28 +1,32 @@
 {
-  // "/": {
-  //   "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js": {
-  //     "type": "script",
-  //     "weight": 1
-  //   },
-  //   "src/infra/shell-app.js": {
-  //     "type": "script",
-  //     "weight": 1
-  //   },
-  //   "src/infra/ui/ui-root.js": {
-  //     "type": "script",
-  //     "weight": 1
-  //   },
-  //   "src/components/initial-view.js": {
-  //     "type": "script",
-  //     "weight": 1
-  //   },
-  //   "src/infra/routing/routing-service.js": {
-  //     "type": "script",
-  //     "weight": 1
-  //   },
-  //   "src/infra/dependency-resolver/dependency-resolver.js": {
-  //     "type": "script",
-  //     "weight": 1
-  //   }
-  // }
+  "/": {
+    // "service-worker.js": {
+    //   "type": "script",
+    //   "weight": 1
+    // },
+    "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "src/infra/shell-app.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "src/infra/dependency-resolver/dependency-resolver.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "design/512max-px.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "src/infra/ui/ui-root.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "src/components/initial-view.js": {
+      "type": "script",
+      "weight": 1
+    }
+  }
 }

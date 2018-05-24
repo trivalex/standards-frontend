@@ -66,12 +66,52 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta property="og:image" content="images/manifest/icon-144x144.png" />
 
   <script>
-    // Load and register pre-caching Service Worker
+    window.performance.mark('mark_boot_start');
+    setupNotifications = () => {
+      // Let's check if the browser supports notifications
+      if (!("Notification" in window)) {
+        return;
+      }
+
+      // Otherwise, we need to ask the user for permission
+      else if (Notification.permission !== 'denied' || Notification.permission === "default") {
+        Notification.requestPermission((permission) => {});
+      }
+    }
+
+    setupNotifications();
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register('service-worker.js', {
           scope: '/',
-        });
+        }).then((reg) => {
+
+          reg.onupdatefound = () => {
+            const iw = reg.installing;
+            console.info("new update available");
+            iw.onstatechange = () => {
+              switch (iw.state) {
+                case 'installed':
+                  if (navigator.serviceWorker.controller) {
+                    reg.showNotification(
+                      'New version available', {
+                        dir: "rtl",
+                        actions: [{
+                          title: "Refresh now!",
+                          action: "update-app",
+                        }],
+                        body: "shell-app has got an update.",
+                        vibrate: [200, 100, 100, 200, 100, 200, 100, 200],
+                        tag: 'update-app'
+                      }).then(() => {});
+                  }
+                  break;
+              }
+            };
+          };
+        }).catch((reason) => {
+          console.error(reason);
+        });;
       });
     }
 
@@ -82,56 +122,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         NODE_ENV: 'production'
       }
     };
-    window.dynamicCSS =`
-html {
-  --blue: #00a5ff;
-  --glass-blue: rgba(0, 165, 255, 0.2);
-  --milk-blue: rgba(0, 165, 255, 0.7);
-  --white: #fff;
-  --glass-white: rgba(255, 255, 255, 0.2);
-  --milk-white: rgba(255, 255, 255, 0.9);
-  --grey: #333;
-  --white: #FFF;
-  --glass-grey: rgba(51, 51, 51, 0.2);
-  --milk-grey: rgba(51, 51, 51, 0.75);
-  --view-primary-color: rgba(0, 165, 255, 1);
-  --view-secondary-color: var(--milk-white);
-  --view-tetiary-color: rgb(0, 100, 185);
-  --view-primary-glass-color: rgba(0, 165, 255, 0.9);
-  --view-secondary-glass-color: var(--milk-white);
-  --view-tetiary-glass-color: rgba(0, 100, 185, 0.4);
-  
-  --suggest-color: rgb(50, 255, 75);
-  --notify-color: rgb(255, 255, 75);
-  --warn-color: rgb(255, 150, 75);
-  --critical-color: rgb(255, 75, 75);
-
-  --viewport-xsmall: 320px;
-  --viewport-small: 512px;
-  --viewport-medium: 768px;
-  --viewport-large: 1200px;
-  --viewport-xlarge: 1800px;
-  --content-margin: var(--gutter-default);
-  --content-padding: var(--gutter-default);
-  --notification-min-height: 48px;
-  --notification-height: 48px;
-  --notification-max-height: 48px;
-  --icon-size: 40px;
-  --gutter-half: 8px;
-  --gutter-default: 16px;
-  --gutter-double: 32px;
-  --indent-one: 16px;
-  --indent-two: 42px;
-  --indent-three: 56px;
-}
-`;
-
-    window.dynamicStyleTag = document.createElement('style')
-    document.head.append(window.dynamicStyleTag)
-    window.dynamicStyleTag.innerHTML = window.dynamicCSS;
+    window.dynamicStyleSpace = ["","","","","","",""];
+    window.dynamicStyleTag = document.createElement('style');
+    document.head.append(window.dynamicStyleTag);
   </script>
-
-  <!-- Add any global styles for body, document, etc. -->
   <style>
     @font-face {
       font-family: 'Pacifico';

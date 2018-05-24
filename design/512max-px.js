@@ -1,5 +1,7 @@
+window.dynamicStyleSpace[1] = `
 @media (max-width: 512px) {
     html {
+        --test-color-a: red;
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --header-height: calc(var(--gutter-default) * 4);
         --content-max-width: var(--viewport-xsmall);
@@ -14,3 +16,5 @@
         --viewport-xsmall: 100vw;
     }
 }
+`;
+window.dynamicStyleTag.innerHTML = window.renderCss();

@@ -1,15 +1,10 @@
-window.dynamicCSS = window.dynamicCSS + `
-@media (min-width: 1521px) {
+window.dynamicStyleSpace[5] = `
+@media (min-width: 1801px) {
     html {
-        --content-max-width: var(--viewport-large);
-    }
-}
-
-@media (min-width: 1201px) {
-    html {
+        --test-color-a: blue;
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --header-height: calc(var(--gutter-default) * 8);
-        --content-max-width: var(--viewport-medium);
+        --content-max-width: var(--viewport-large);
         --notification-min-width: 400px;
         --notification-width: 100%;
         --notification-max-width: 400px;
@@ -19,3 +14,4 @@ window.dynamicCSS = window.dynamicCSS + `
     }
 }
 `;
+window.dynamicStyleTag.innerHTML = window.renderCss();

@@ -1,6 +1,7 @@
-window.dynamicCSS = window.dynamicCSS + `
+window.dynamicStyleSpace[2] = `
 @media (min-width: 513px) {
     html {
+        --test-color-a: orange;
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --header-height: calc(var(--gutter-default) * 4);
         --content-max-width: var(--viewport-small);
@@ -13,3 +14,4 @@ window.dynamicCSS = window.dynamicCSS + `
     }
 }
 `;
+window.dynamicStyleTag.innerHTML = window.renderCss();

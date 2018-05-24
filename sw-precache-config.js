@@ -9,7 +9,6 @@
  */
 
 /* eslint-env node */
-
 module.exports = {
   staticFileGlobs: [
     'manifest.json',
@@ -17,7 +16,7 @@ module.exports = {
   ],
   runtimeCaching: [
     {
-      urlPattern: /\/@webcomponents\/webcomponentsjs\//,
+      urlPattern: /\/@webcomponents\/webcomponentsjs\/webcomponents-loader.js\//,
       handler: 'fastest'
     },
     {

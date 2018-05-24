@@ -3,7 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "build/esm-bundled",
+    "public": "build/es6-bundled",
     "rewrites": [{
       "source": "/",
       "destination": "/index.html"
@@ -12,7 +12,7 @@
       "source": "/",
       "headers": [{
         "key": "Link",
-        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,</src/infra/shell-app.js>;rel=preload;as=script,</src/infra/ui/ui-root.js>;rel=preload;as=script,</src/components/initial-view.js>;rel=preload;as=script,</src/infra/dependency-resolver/dependency-resolver.js>;rel=preload;as=script,</src/infra/routing/routing-service.js>;rel=preload;as=script"
+        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;nopush;as=script,</design/512max-px.js>;rel=preload;nopush;as=script,</src/infra/ui/ui-root.js>;rel=preload;nopush;as=script,</src/components/initial-view.js>;rel=preload;nopush;as=script,</src/infra/dependency-resolver/dependency-resolver.js>;rel=preload;nopush;as=script"
       }]
     }]
   }

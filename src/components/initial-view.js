@@ -18,9 +18,10 @@ const appear = (el, dura, color, size) => {
         duration: dura,
         opacity: [{
             value: 0.0,
-            duration: dura
+            duration: 0
         }, {
             value: 0.7,
+            duration: dura
         }],
         width: [{
             value: `${window.getComputedStyle(document.body).getPropertyValue('--viewport-xsmall')} `,
@@ -46,19 +47,11 @@ class InitialView extends LitElement {
 <style>
 :host {
     position: absolute;
-    background: var(--blue);
     ${ShellAppTheme}
 }
 
-:host[unresolved="true"] {
-}
-:host> ::slotted(*) {
-    width: 100%;
-    height: 100%;
-}
-
 bits-animation {
-    --bit-color: white;
+    --bit-color: var(--white, white);
     --bit-size: 24px;
     width: 100%;
     height: 100%;
@@ -67,19 +60,10 @@ bits-animation {
 `;
     }
 
-    static get properties() {
-        return {
-            justAnimate: Boolean
-        };
-    }
-
-    constructor() {
-        super();
-
-    }
-
     connectedCallback() {
         super.connectedCallback();
+        window.onresize();
+        window.performance.mark('mark_interactive');
 
         let _loadAnimation = anime(appear(this, 300, getComputedStyle(document.body).getPropertyValue(
             '--white'), 30)).complete = (() => {
@@ -141,6 +125,12 @@ bits-animation {
                 easing: 'linear'
             });
             this.setAttribute('unresolved', false);
+            this.dispatchEvent(new CustomEvent('rail-interactive', {
+                bubbles: true,
+                composed: true,
+                scoped: false
+            }));
+            window.onresize();
         });
     }
 }
