@@ -28,7 +28,6 @@ export const router = (store) => (baseElement) => class extends connect(store)(b
 
     addRouteFromElement(element) {
         if (!this.isRoutable(element)) {
-            console.debug("Tried to create a route from an element that was not routable", element);
             return;
         }
         store.dispatch(addRoute(new Route(element.routePath, element.componentUri)));

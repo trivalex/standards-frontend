@@ -77,48 +77,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
       // https://github.com/reactjs/redux/issues/2907
       window.process = { env: { NODE_ENV: 'production' } };
+      window.dynamicstyle = document.createElement("style");
+      window.dynamicstyle.innerHTML = "";
+      window.id = "dynamicstyle";
+      document.head.appendChild(window.dynamicstyle);
     </script>
 
     <!-- Add any global styles for body, document, etc. -->
     <style>
-@font-face {
-font-family: 'Pacifico';
-font-style: normal;
-font-weight: 400;
-src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
-}
-
-html {
---blue: #00a5ff;
---glass-blue: rgba(0, 165, 255, 0.2);
---milk-blue: rgba(0, 165, 255, 0.7);
---white: #fff;
---glass-white: rgba(255, 255, 255, 0.2);
---milk-white: rgba(255, 255, 255, 0.9);
---grey: #333;
---white: #FFF;
---glass-grey: rgba(51, 51, 51, 0.2);
---milk-grey: rgba(51, 51, 51, 0.75);
---view-primary-color: rgba(0, 165, 255, 1);
---view-secondary-color: var(--milk-white);
---view-tetiary-color: rgb(0, 100, 185);
---view-primary-glass-color: rgba(0, 165, 255, 0.9);
---view-secondary-glass-color: var(--milk-white);
---view-tetiary-glass-color: rgba(0, 100, 185, 0.4);
---suggest-color: rgb(50, 255, 75);
---notify-color: rgb(255, 255, 75);
---warn-color: rgb(255, 150, 75);
---critical-color: rgb(255, 75, 75);
-}
-body {
-margin: 0;
-/* This is a font-stack that tries to use the system-default sans-serifs first */
-font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-line-height: 1.5;
-min-height: 100vh;
--webkit-font-smoothing: antialiased;
-background: var(--grey);
-}
+      body {
+        margin: 0;
+        /* This is a font-stack that tries to use the system-default sans-serifs first */
+        font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        line-height: 1.5;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+        background: var(--grey);
+      }
     </style>
   </head>
   <body>

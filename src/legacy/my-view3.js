@@ -17,7 +17,7 @@ import './shop-products.js';
 import './shop-cart.js';
 
 // This element is connected to the redux store.
-import { store } from '../store.js';
+import { store } from '../infra/store.js';
 
 // These are the actions needed by this element.
 import { checkout } from '../actions/shop.js';

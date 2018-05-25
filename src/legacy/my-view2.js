@@ -15,7 +15,7 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import './counter-element.js';
 
 // This element is connected to the redux store.
-import { store } from '../store.js';
+import { store } from '../infra/store.js';
 
 // These are the actions needed by this element.
 import { increment, decrement } from '../actions/counter.js';

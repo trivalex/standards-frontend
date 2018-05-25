@@ -65,7 +65,6 @@ bits-animation {
 </style>
 `;
     }
-
     static get properties() {
         return {
             justAnimate: Boolean
@@ -77,7 +76,6 @@ bits-animation {
 
         let _loadAnimation = anime(appear(this, 500, getComputedStyle(document.body).getPropertyValue(
             '--warn-color'), 30)).complete = (() => {
-            console.log("loading");
             _loadAnimation = anime({
                 targets: this,
                 rotate: {
@@ -137,6 +135,13 @@ bits-animation {
                 },
                 duration: 2000
             });
+
+            const interactiveEvent = new CustomEvent("rail-interactive", {
+                bubbles: true,
+                composed: true
+            });
+    
+            this.dispatchEvent(interactiveEvent);
         });
     }
 }

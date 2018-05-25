@@ -3,7 +3,7 @@ import {
     ADD_ROUTE,
     ADD_ROUTES
 } from './routing-actions.js';
-import { store } from '../../store.js';
+import { store } from '../../infra/store.js';
 
 export const RoutingReducer = (state, action) => {
     /* jshint ignore:start */

@@ -1,8 +1,4 @@
 import {
-    LitElement,
-    html
-} from '@polymer/lit-element';
-import {
     FlattenedNodesObserver
 } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import {
@@ -12,15 +8,15 @@ import {
  * dependency-provider provides 'document dependency resolution',
  * a dependency injection approach for components within it's light-DOM.
  */
-class DependencyResolver extends LitElement {
-    _render() {
-        return html `
-<slot id="dependencies"></slot>
-        `;
-    }
+class DependencyResolver extends HTMLElement {
 
     connectedCallback() {
-        super.connectedCallback();
+        let tmpl = document.createElement('template');
+        tmpl.innerHTML = `<slot id="dependencies"></slot>`;
+
+        let shadowRoot = this.attachShadow({mode: 'open'});
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
         this._dependencyObserver = new FlattenedNodesObserver(this.shadowRoot.getElementById("dependencies"), (info) => {
             // registration
             info.addedNodes.filter((node) => {

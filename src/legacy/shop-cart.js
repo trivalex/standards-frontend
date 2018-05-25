@@ -14,7 +14,7 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import './shop-item.js';
 
 // This element is connected to the redux store.
-import { store } from '../store.js';
+import { store } from '../infra/store.js';
 import { removeFromCart } from '../actions/shop.js';
 import { cartItemsSelector, cartTotalSelector } from '../reducers/shop.js';
 import { removeFromCartIcon } from './my-icons.js';
