@@ -65,43 +65,94 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta property="og:image" content="images/manifest/icon-144x144.png" />
 
     <script>
-      // Load and register pre-caching Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('service-worker.js', {
-            scope: '/',
-          });
-        });
+      
+    window.performance.mark('mark_boot_start');
+    setupNotifications = () => {
+      // Let's check if the browser supports notifications
+      if (!("Notification" in window)) {
+        return;
       }
 
-      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
-      // https://github.com/reactjs/redux/issues/2907
-      window.process = { env: { NODE_ENV: 'production' } };
-      window.dynamicstyle = document.createElement("style");
-      window.dynamicstyle.innerHTML = "";
-      window.id = "dynamicstyle";
-      document.head.appendChild(window.dynamicstyle);
-    </script>
-
-    <!-- Add any global styles for body, document, etc. -->
-    <style>
-      body {
-        margin: 0;
-        /* This is a font-stack that tries to use the system-default sans-serifs first */
-        font-family: Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-        line-height: 1.5;
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
-        background: var(--grey);
+      // Otherwise, we need to ask the user for permission
+      else if (Notification.permission !== 'denied' || Notification.permission === "default") {
+        Notification.requestPermission((permission) => {});
       }
-    </style>
-  </head>
-  <body>
-    <shell-app></shell-app>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script type="module" src="src/infra/shell-app.js" crossorigin></script>
-  </body>
+    }
+
+    setupNotifications();
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: '/',
+        }).then((reg) => {
+
+          reg.onupdatefound = () => {
+            const iw = reg.installing;
+            console.info("new update available");
+            iw.onstatechange = () => {
+              switch (iw.state) {
+                case 'installed':
+                  if (navigator.serviceWorker.controller) {
+                    reg.showNotification(
+                      'New version available', {
+                        dir: "rtl",
+                        actions: [{
+                          title: "Refresh now!",
+                          action: "update-app",
+                        }],
+                        body: "shell-app has got an update.",
+                        vibrate: [200, 100, 100, 200, 100, 200, 100, 200],
+                        tag: 'update-app'
+                      }).then(() => {});
+                  }
+                  break;
+              }
+            };
+          };
+        }).catch((reason) => {
+          console.error(reason);
+        });;
+      });
+    }
+
+    // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+    // https://github.com/reactjs/redux/issues/2907
+    window.process = {
+      env: {
+        NODE_ENV: 'production'
+      }
+    };
+    window.dynamicStyleSpace = ["","","","","","",""];
+    window.dynamicStyleTag = document.createElement('style');
+    document.head.append(window.dynamicStyleTag);
+  </script>
+  <style>
+    @font-face {
+      font-family: 'Pacifico';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
+    }
+
+    body {
+      margin: 0;
+      /* This is a font-stack that tries to use the system-default sans-serifs first */
+      font-family: Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background: var(--grey);
+    }
+  </style>
+</head>
+
+<body>
+  <shell-app></shell-app>
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="src/infra/shell-app.js" crossorigin></script>
+</body>
+
 </html>

@@ -12,7 +12,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 // This element is connected to the redux store.
-import { store } from '../infra/store.js';
+import { store } from '../store.js';
 import { getAllProducts, addToCart } from '../actions/shop.js';
 import { addToCartIcon } from './my-icons.js';
 import { ButtonSharedStyles } from './button-shared-styles.js';

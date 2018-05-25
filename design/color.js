@@ -19,4 +19,12 @@ export const ShellAppColors = `
     --notify-color: rgb(255, 255, 75);
     --warn-color: rgb(255, 150, 75);
     --critical-color: rgb(255, 75, 75);
+
+    --app-primary-color: var(--view-primary-color);
+    --app-secondary-color: var(--view-secondary-color);
+    --app-tetiary-color: var(--view-tetiary-color);
+    --app-dark-text-color: var(--view-tetiary-color);
+    --app-light-text-color: white;
+    --app-section-even-color: #f7f7f7;
+    --app-section-odd-color: white;
   `;

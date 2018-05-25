@@ -26,10 +26,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../node_modules/wct-browser-legacy/browser.js"></script>
 
     <!-- Import the element to test -->
-    <script type="module" src="../../src/components/my-view1.js"></script>
+    <!-- <script type="module" src="../../src/components/my-view1.js"></script>
     <script type="module" src="../../src/components/my-view2.js"></script>
     <script type="module" src="../../src/components/my-view3.js"></script>
-    <script type="module" src="../../src/components/my-view404.js"></script>
+    <script type="module" src="../../src/components/my-view404.js"></script> -->
   </head>
   <body>
     <test-fixture id="view1">
@@ -58,25 +58,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       import {axeReport} from 'pwa-helpers/axe-report.js';
 
       suite('views a11y tests', function() {
-        test('my-view1', function() {
-          const el = fixture('view1');
-          return axeReport(el);
-        });
+        // test('my-view1', function() {
+        //   const el = fixture('view1');
+        //   return axeReport(el);
+        // });
 
-        test('my-view2', function() {
-          const el = fixture('view2');
-          return axeReport(el);
-        });
+        // test('my-view2', function() {
+        //   const el = fixture('view2');
+        //   return axeReport(el);
+        // });
 
-        test('my-view3', function() {
-          const el = fixture('view3');
-          return axeReport(el);
-        });
+        // test('my-view3', function() {
+        //   const el = fixture('view3');
+        //   return axeReport(el);
+        // });
 
-        test('my-view404', function() {
-          const el = fixture('view404');
-          return axeReport(el);
-        });
+        // test('my-view404', function() {
+        //   const el = fixture('view404');
+        //   return axeReport(el);
+        // });
       });
     </script>
   </body>

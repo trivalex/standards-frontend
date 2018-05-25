@@ -8,15 +8,20 @@ import {
  * dependency-provider provides 'document dependency resolution',
  * a dependency injection approach for components within it's light-DOM.
  */
+
 class DependencyResolver extends HTMLElement {
 
-    connectedCallback() {
+    constructor() {
+        super();
         let tmpl = document.createElement('template');
         tmpl.innerHTML = `<slot id="dependencies"></slot>`;
-
-        let shadowRoot = this.attachShadow({mode: 'open'});
+        let shadowRoot = this.attachShadow({
+            mode: 'open'
+        });
         shadowRoot.appendChild(tmpl.content.cloneNode(true));
+    }
 
+    connectedCallback() {
         this._dependencyObserver = new FlattenedNodesObserver(this.shadowRoot.getElementById("dependencies"), (info) => {
             // registration
             info.addedNodes.filter((node) => {

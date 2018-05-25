@@ -1,31 +1,17 @@
 import {
-    LitElement,
-    html
-} from '@polymer/lit-element';
-
-import {
     updateOffline
 } from '../../actions/app.js';
 import {
     installOfflineWatcher
 } from 'pwa-helpers/network.js';
-/**
- */
-class NetwortkService extends LitElement {
-    _render(props) {
-        return html `
-<slot></slot>
-    `;
-    }
-
-    static get properties() {
-        return {};
-    }
-
+class NetwortkService extends router(store)(HTMLElement) {
     constructor() {
         super();
-    }
-    _firstRendered() {
+        let tmpl = document.createElement('template');
+        tmpl.innerHTML = `<slot></slot>`;
+
+        let shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
         installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
     }
 }

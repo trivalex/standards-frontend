@@ -2,16 +2,8 @@ import {
     LitElement,
     html
 } from '@polymer/lit-element';
-import {
-    installMediaQueryWatcher
-} from 'pwa-helpers/media-query.js';
-import './ui-manager.js';
-import { ShellAppTheme } from '../../../design/theme.js';
-
-window.dynamicstyle.innerHTML = `html { ${ShellAppTheme} }`;
 class UiRoot extends LitElement {
     _render() {
-        // Anything that's related to rendering should be done in here.
         return html `
 <style>
     :host {
@@ -27,42 +19,27 @@ class UiRoot extends LitElement {
         background-color: var(--app-tertiary-color);
     }
 
-    :host> ::slotted(*) {
-        width: 100%;
-        height: 100%;
-    }
     bits-animation {
         position: fixed;
         width: 100vw;
         height: 100vh;
         top: 0px;
 
-        --bit-color: var(var(--bit-color), white);
-        --bit-size: 24px;
+        --bit-color: var(--white);
+        --bit-size: var(--icon-button-size);
     }
 
     initial-view {
-        display: block;
         position: fixed;
-        top: 0px;
+        background: var(--test-color-a);
+        transition: background-color 0.5s ease;
     }
 </style>
 <bits-animation justAnimate duration="1000" maxBitsCount=20></bits-animation>
 <initial-view justAnimate></initial-view>
 <ui-manager id="ui-manager">
-    <nav class="toolbar-list">
-    </nav>
-
-    <nav class="drawer-list">
-    </nav>
-
-    <slot slot="pages" name="pages" id="pages">
-    </slot>
-
-    <footer>
-    </footer>
 </ui-manager>
-`;
+    `;
     }
 
     static get properties() {
@@ -71,16 +48,17 @@ class UiRoot extends LitElement {
 
     constructor() {
         super();
+        /* jshint ignore:start */
+        import('../../components/initial-view.js').then(() => {
+            import('../../components/bits-animation.js');
+            import('./ui-manager.js').then(() => {});
+        });
+        /* jshint ignore:end */
     }
 
     _firstRendered() {
-        /* jshint ignore:start */
-        import('./ui-manager.js').then(() => {
-            import('../../components/bits-animation.js').then(() => {});
-            import('../../components/initial-view.js').then(() => {});
-            import('../../../design/theme.js').then(() => {});
-        });
-        /* jshint ignore:end */
+        window.performance.mark('mark_boot_end');
+        window.performance.mark('mark_first_paint');
     }
 }
 

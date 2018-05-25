@@ -16,13 +16,16 @@ class UiManager extends Dependant(LitElement) {
     }
 
     _wireDependencies() {
-        import("../routing/routing-service.js").then(() => {
+        /* jshint ignore:start */
+        import("../../infra/routing/routing-service.js").then(() => {
             this._pageObserver = new FlattenedNodesObserver(this.shadowRoot.getElementById("pages"), (info) => {
                 this.routingService = this._wireDependency(this.routingService, "routing-service");
+                
                 this.routingService.hydrateRouteDataFromElements(info.addedNodes);
                 this.routingService.reduceRouteDataFromElements(info.removedNodes);
             });
         });
+        /* jshint ignore:end */
     }
 }
 

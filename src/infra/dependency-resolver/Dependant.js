@@ -1,4 +1,4 @@
-export const DEPEDENCY_WIRING_PREFIX = "wire-dependency";
+export const DEPEDENCY_WIRING_PREFIX = "wire";
 
 export const Dependant = (baseElement) => class extends baseElement {
     connectedCallback() {
