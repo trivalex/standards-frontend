@@ -27,12 +27,4 @@ export const ShellAppColors = `
     --app-light-text-color: white;
     --app-section-even-color: #f7f7f7;
     --app-section-odd-color: white;
-
-    --app-header-background-color: white;
-    --app-header-text-color: var(--app-dark-text-color);
-    --app-header-selected-color: var(--app-primary-color);
-
-    --app-drawer-background-color: var(--app-secondary-color);
-    --app-drawer-text-color: var(--app-light-text-color);
-    --app-drawer-selected-color: #78909C;
   `;

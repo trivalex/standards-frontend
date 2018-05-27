@@ -7,8 +7,9 @@
   "extraDependencies": [
     "manifest.json",
     "design/**",
-    "node_modules/@webcomponents/webcomponentsjs/**",
-    "push-manifest.json"
+    "node_modules/@webcomponents/webcomponentsjs/**/*",
+    "push-manifest.json",
+    "src/components/**/*"
   ],
   "builds": [
     {

@@ -38,17 +38,17 @@ class DependencyResolver extends HTMLElement {
             });
 
             // unregistration
-            info.removedNodes.filter((node) => {
-                return (node.nodeType === Node.ELEMENT_NODE);
-            }).forEach(element => {
-                if (element.tagName !== undefined) {
-                    this.removeEventListener(
-                        `${DEPEDENCY_WIRING_PREFIX}-${element.tagName.toLowerCase()}`, (event) => {
-                            event.stopPropagation();
-                        }
-                    );
-                }
-            });
+            // info.removedNodes.filter((node) => {
+            //     return (node.nodeType === Node.ELEMENT_NODE);
+            // }).forEach(element => {
+            //     if (element.tagName !== undefined) {
+            //         this.removeEventListener(
+            //             `${DEPEDENCY_WIRING_PREFIX}-${element.tagName.toLowerCase()}`, (event) => {
+            //                 event.stopPropagation();
+            //             }
+            //         );
+            //     }
+            // });
         });
     }
 }

@@ -6,7 +6,6 @@ import {
     timeOut
 } from '@polymer/polymer/lib/utils/async.js';
 import '../../node_modules/animejs/anime.js';
-import { ShellAppTheme } from '../../design/theme.js';
 
 const bitFlameAnimation = (el, dura, heigd) => {
     return {
@@ -22,7 +21,7 @@ const bitFlameAnimation = (el, dura, heigd) => {
         }],
         translateY: [{
             value: 0 - heigd,
-            duration: dura,
+            duration: dura
         }, {
             value: 0,
             delay: (dura - (dura / 6))
@@ -38,23 +37,18 @@ class BitsAnimation extends LitElement {
 :host {
     width: inherit;
     height: inherit;
-    position: absolute;
-    ${ShellAppTheme}
 }
 #bits {
     width: inherit;
     height: inherit;
     align-items: flex-end;
     display: flex;
-    position: absolute;
     justify-content: space-between;
     @apply --bits-container;
 }
 .bit {
-    min-width: var(--bit-size, 8px);
-    max-width: var(--bit-size, 8px);
-    min-height: var(--bit-size, 8px);
-    max-height: var(--bit-size, 8px);
+    min-width: var(--bit-size, --gutter-default);
+    min-height: var(--bit-size, --gutter-default);
     background-color: var(--bit-color, black);
     opacity: 0;
 }
@@ -68,7 +62,7 @@ class BitsAnimation extends LitElement {
                 type: Number,
                 notify: true,
                 reflectToAttribute: true,
-                value: 5
+                value: 0
             },
             animate: {
                 type: Boolean,
@@ -88,59 +82,40 @@ class BitsAnimation extends LitElement {
     connectedCallback() {
         super.connectedCallback();
 
-        if (this.routeKey !== undefined) {
-            this.dispatchEvent(new CustomEvent('register-nav-element-animator', {
-                detail: {
-                    routeKey: this.routeKey,
-                    animator: this
-                },
-                bubbles: true,
-                composed: true,
-                scoped: false
-            }));
-        }
-
         if (this.justAnimate) {
             let animateTask = timeOut
-                .after(1000);
+                .after(100);
             animateTask.run(() => {
-                this.animateToNav();
+                this.flame();
             });
         }
-    }
-
-    animateToNav() {
-        this.animate = true;
-        this.flame();
-    }
-
-    cancleAnimateToNav() {
-        this.animate = false;
     }
 
     flame() {
         if (this.animate) {
             let bitsContainer = this.shadowRoot.getElementById("bits");
-            let bitHeight = getComputedStyle(document.body).getPropertyValue(
-                '--bit-size').replace("px", "");
-            if (bitHeight === 0 || bitHeight === undefined) bitHeight = 8;
-            let height = bitsContainer.offsetHeight - bitHeight;
-            let bitCount = this.maxBitsCount;
+            let bitHeight = Math.floor(parseInt(getComputedStyle(document.body).getPropertyValue(
+                '--bit-size'))) || Math.floor(parseInt(getComputedStyle(document.body).getPropertyValue(
+                '--gutter-default')));
+            let height = bitsContainer.offsetHeight;
 
+            if (this.maxBitsCount < 1)  {
+                let tmp = Math.round(parseInt(height / bitHeight));
+                this.maxBitsCount = (tmp < 4) ? 4 : tmp;
+            }
+
+            
             const sparkCall = (bit, height) => {
                 this.spark(bit, height);
             };
 
-            for (let i = 0; i < bitCount; i++) {
+            for (let i = 0; i < this.maxBitsCount; i++) {
                 let bit = document.createElement("div");
                 bit.classList.add("bit");
                 bit.id = i;
 
-
-
                 bitsContainer.appendChild(bit);
-                let sparkTask = timeOut
-                    .after(10);
+                let sparkTask = timeOut.after(10);
                 sparkTask.run(sparkCall(bit, height));
             }
         }

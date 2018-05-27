@@ -1,9 +1,5 @@
 {
   "/": {
-    // "service-worker.js": {
-    //   "type": "script",
-    //   "weight": 1
-    // },
     "node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js": {
       "type": "script",
       "weight": 1
@@ -21,6 +17,10 @@
       "weight": 1
     },
     "src/infra/ui/ui-root.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "src/components/tri-loading-indicator.js": {
       "type": "script",
       "weight": 1
     },
