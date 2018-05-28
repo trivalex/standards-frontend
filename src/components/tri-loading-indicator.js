@@ -33,9 +33,15 @@ class TriLoadingIndicator extends LitElement {
     }
     .side div {
         height: 25%;
-        background-color: var(--tri-li-bg-color);
         opacity: 0.7;
         margin: 1px;
+        background-color: var(--tri-li-bg-color) ;
+    }
+    .side div.color-a {
+        background-color: var(--tri-li-color-a, red);
+    }
+    .side div.color-b {
+        background-color: var(--tri-li-color-b, white);
     }
     .back {
         transform: translateZ(calc((var(--tri-li-size) - (var(--tri-li-size) * 2 )) / 2));
@@ -119,38 +125,43 @@ class TriLoadingIndicator extends LitElement {
 
     loadAnimation(div, repeat) {
         let t = ((Math.random() * 300)),
-        style = getComputedStyle(this).getPropertyValue('--tri-li-size'),
-        a = anime({
-            targets: div,
-            delay: t,
-            width: [{
-                value: "0px",
-            }, {
-                value: "100%",
-                duration: t,
-            }, ],
-            opacity: [{
-                    value: 0,
-                },
-                {
-                    value: 0.7,
+            style = getComputedStyle(this).getPropertyValue('--tri-li-size'),
+            a = anime({
+                targets: div,
+                delay: t,
+                width: [{
+                    value: "0px",
+                }, {
+                    value: "100%",
                     duration: t,
-                }
-            ],
-            easing: 'linear'
-        }).finished;
-        
+                }, ],
+                opacity: [{
+                        value: 0,
+                    },
+                    {
+                        value: 0.7,
+                        duration: t,
+                    }
+                ],
+                easing: 'linear'
+            }).finished;
+
         a.then((anim) => {
             if (this.animate == true && repeat) {
-                console.log(this.animate);
                 this.loadAnimation(div, repeat);
                 return;
             }
-            this.setAttribute("interactive", true);
             if (repeat) {
                 setTimeout(() => {
+                    if (div.parentNode.classList.contains("left") || div.parentNode.classList.contains("right")) {
+                        div.classList.add("color-a");
+                    };
+                    if (div.parentNode.classList.contains("back") || div.parentNode.classList.contains("front")) {
+                        div.classList.add("color-b");
+                    };
+                    this.setAttribute("interactive", true);
                     this.loadAnimation(div, false);
-                }, 200);
+                }, 500);
             }
         });
     }

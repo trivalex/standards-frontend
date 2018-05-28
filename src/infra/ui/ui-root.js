@@ -10,11 +10,6 @@ class UiRoot extends LitElement {
         display: block;
         position: fixed;
         
-        top: 0px;
-        left: 0px;
-        width: 100vw;
-        height: 100vh;
-
         background-color: var(--app-tertiary-color);
         color: black;
         font-family: 'Montserrat', sans-serif;
@@ -38,26 +33,29 @@ class UiRoot extends LitElement {
         --tri-li-bg-color: var(--critical-color);
         left: calc(50vw - var(--small-card-size) / 2);
         top: calc(50vh  - var(--small-card-size) / 2);
-        z-index: 1000;
-        transition: top 1s ease-out;
-        transition: opacity 1s ease-out;
+-webkit-transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); 
+   -moz-transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); 
+     -o-transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); 
+        transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); /* custom */
+        z-index: 10000;
     }
 
-     tri-loading-indicator[interactive="true"] {
+     tri-loading-indicator[interactive] {
         left: var(--gutter-double);
         top: var(--gutter-double);
-        --tri-li-size: var(--icon-size);
+        --tri-li-size: var(--icon-size);    
+        perspective: 75px;
+
     }
     
     tri-loading-indicator[unresolved] {
-        --tri-li-size: var(--icon-size);
         opacity: 0;
     }
 
     initial-view[ready] {
         -webkit-align-self: center;
         align-self: center;
-        left: calc(50% - ((var(--content-max-width) / 2) + var(--content-margin)));
+        left: var(--content-left);
         -webkit-animation:presentpage 0.5s ease-out;
         -moz-animation:presentpage 0.5s ease-out;
         animation:presentpage 0.5s ease-out;
@@ -68,9 +66,9 @@ class UiRoot extends LitElement {
 
         margin-left: var(--content-margin);
         margin-right: var(--content-margin);
-        margin-top: var(--gutter-double);
-        margin-bottom: var(--gutter-double);
-        padding: var(--gutter-half);
+        margin-top: var(--content-margin);
+        margin-bottom: var(--content-margin);
+        padding: var(--content-padding);
         width: var(--content-max-width);
         max-width: var(--content-max-width);
         min-height: calc(100% - var(--gutter-double));
@@ -83,10 +81,10 @@ class UiRoot extends LitElement {
     initial-view {
         display: block;
         position: absolute;
-        -webkit-transition: all 0.5s ease-out;
-        -moz-transition: all 0.5s ease-out;
-        -o-transition: all 0.5s ease-out;
-        transition: all 0.5s ease-out;
+-webkit-transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); 
+   -moz-transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); 
+     -o-transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); 
+        transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); /* custom */
         display: block;
         position: absolute;
     }
@@ -128,7 +126,7 @@ class UiRoot extends LitElement {
                 });
             });
         });;
-        
+
         this.addEventListener('rail-interactive', () => {
             this.interactive = true;
             this.setAttribute("interactive", true);
@@ -141,5 +139,4 @@ class UiRoot extends LitElement {
         performance.mark('mark_first_paint');
     }
 }
-
 customElements.define('ui-root', UiRoot);

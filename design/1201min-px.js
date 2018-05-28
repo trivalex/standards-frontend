@@ -11,6 +11,7 @@ window.dynamicStyleSpace[4] = `
         --small-card-size: 160px;
         --medium-card-size: calc(320px + var(--gutter-double));
         --large-card-size: calc(640px + var(--gutter-double) + var(--gutter-double));
+        --content-left: calc(50% - ((var(--content-max-width) / 2) + (var(--content-margin) * 2)));
     }
 }
 @media (min-width: 1521px) and (max-width: 1800px) {

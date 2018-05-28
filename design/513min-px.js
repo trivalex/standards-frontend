@@ -11,6 +11,8 @@ window.dynamicStyleSpace[2] = `
         --small-card-size: 128px;
         --medium-card-size: calc(256px + var(--gutter-double));
         --large-card-size: calc(640px + var(--gutter-double) + var(--gutter-double));
+        --viewport-xsmall: calc(100vw - var(--content-padding) * 2);
+        --content-left: calc(50% - ((var(--content-max-width) / 2) + (var(--content-margin) * 2)));
     }
 }
 `;

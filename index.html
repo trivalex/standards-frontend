@@ -141,7 +141,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       line-height: 1.5;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
-      background: var(--grey);
+      background: #333;
     }
   </style>
 </head>
@@ -151,8 +151,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <noscript>
     Please enable JavaScript to view this website.
   </noscript>
+  <script type="module" src="src/components/tri-loading-indicator.js"></script>
   <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="src/infra/shell-app.js" crossorigin></script>
+  <script type="module" src="src/infra/shell-app.js" crossorigin>Loading</script>
 </body>
 
 </html>

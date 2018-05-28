@@ -6,9 +6,7 @@ import {
 class InitialView extends LitElement {
     _render() {
         return html `
-        ${(this.ready)? fetch("https://baconipsum.com/api/?type=meat-and-filler&paras=50&start-with-lorem=1")
-                .then((r) => r.text().then((r) => r.replace('["', '').replace('"]', '')))
-                .catch((e) => e) : "fetching text..."}
+        ${(this.data)? this.data : "fetching text..."}
 `;
     }
 
@@ -43,7 +41,10 @@ class InitialView extends LitElement {
                 scoped: false
             });
             this.dispatchEvent(interactiveEvent);
-        }, 10);
+        }, 50);
+        fetch("https://baconipsum.com/api/?type=meat-and-filler&paras=25&start-with-lorem=1")
+            .then((r) => r.text().then((r) => this.data = r.replace('["', '').replace('"]', '')))
+            .catch((e) => e);
     }
 }
 customElements.define("initial-view", InitialView);
