@@ -2,7 +2,6 @@ window.dynamicStyleSpace[4] = `
 @media (min-width: 1201px) {
     html {
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
-        --header-height: calc(var(--gutter-default) * 8);
         --content-max-width: var(--viewport-medium);
         --notification-min-width: 400px;
         --notification-width: 100%;

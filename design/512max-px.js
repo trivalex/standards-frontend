@@ -2,7 +2,6 @@ window.dynamicStyleSpace[1] = `
 @media (max-width: 512px) {
     html {
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
-        --header-height: calc(var(--gutter-default) * 4);
         --content-max-width: var(--viewport-xsmall);
         --content-margin: 0px;
         --content-padding: 8px;
