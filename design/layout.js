@@ -17,7 +17,7 @@ export const LayoutCSS = `
     --indent-two: 42px;
     --indent-three: 56px;
     --framed-icon-size: calc(var(--icon-size) + var(--gutter-default));
-    --header-height: var(--framed-icon-size);
+    --header-height:  calc(var(--framed-icon-size) + (var(--gutter-default) * 2));
     --app-drawer-width: calc((var(--framed-icon-size) * 5) + (var(--gutter-default) * 6));
     --app-drawer-content-width: calc(var(--app-drawer-width) - var(--gutter-default));
     --drawer-card-size: calc((var(--app-drawer-content-width) - var(--gutter-default) * 3) / 3);

@@ -59,7 +59,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             text-align: center;
             background-color:  var(--view-primary-glass-color);
             color: var(--app-header-text-color);
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--milk-white);
             min-height: var(--header-height);
             z-index: 2000;
             opacity: 1;
@@ -100,6 +100,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             background: var(--milk-white);
         }
         .drawer-list {
+            border-top: 1px solid var(--milk-white);
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-auto-rows : var(--drawer-card-size);
