@@ -15,10 +15,11 @@
     {
       "name": "es6-bundled",
       "browserCapabilities": [
-        "es2015"
+        "es2015",
+        "serviceworker"
       ],
       "js": {
-        "compile": "es2015",
+        "compile": true,
         "minify": true,
         "transformModulesToAmd": true
       },

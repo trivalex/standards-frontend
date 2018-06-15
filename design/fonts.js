@@ -1,4 +1,4 @@
-export const ShellAppFonts = `
+export const FontsCSS = `
     --fluid-fontsize-a: calc(2.827em + 8 * ((100vw - 320px) / 960));
     --fluid-fontsize-b: calc(1.999em + 8 * ((100vw - 320px) / 960));
     --fluid-fontsize-c: calc(1em + 8 * ((100vw - 320px) / 960));

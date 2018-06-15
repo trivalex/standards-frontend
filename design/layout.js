@@ -1,4 +1,4 @@
-export const ShellAppLayout = `
+export const LayoutCSS = `
     --viewport-xsmall: 320px;
     --viewport-small: 512px;
     --viewport-medium: 768px;
@@ -16,8 +16,9 @@ export const ShellAppLayout = `
     --indent-one: 16px;
     --indent-two: 42px;
     --indent-three: 56px;
+    --framed-icon-size: calc(var(--icon-size) + var(--gutter-default));
+    --header-height: var(--framed-icon-size);
     --app-drawer-width: calc((var(--framed-icon-size) * 5) + (var(--gutter-default) * 6));
     --app-drawer-content-width: calc(var(--app-drawer-width) - var(--gutter-default));
-    --framed-icon-size: calc(var(--icon-size) + var(--gutter-default));
     --drawer-card-size: calc((var(--app-drawer-content-width) - var(--gutter-default) * 3) / 3);
 `;

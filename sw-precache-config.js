@@ -16,7 +16,7 @@ module.exports = {
   ],
   runtimeCaching: [
     {
-      urlPattern: /\/@webcomponents\/webcomponentsjs\/webcomponents-loader.js\//,
+      urlPattern: /\/@webcomponents\/webcomponentsjs\/*/,
       handler: 'fastest'
     },
     {
@@ -24,11 +24,7 @@ module.exports = {
       handler: 'fastest'
     },
     {
-      urlPattern: /\/design\/designjs\//,
-      handler: 'fastest'
-    },
-    {
-      urlPattern: /\/design\/design\//,
+      urlPattern: /\/design\/design\/*/,
       handler: 'fastest'
     },
     {
@@ -36,7 +32,7 @@ module.exports = {
       handler: 'fastest'
     },
     {
-      urlPattern: /^https:\/\/baconipsum.com\/api\//,
+      urlPattern: /^https:\/\/baconipsum.com\/api\/*/,
       handler: 'fastest'
     },
   ]

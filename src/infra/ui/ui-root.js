@@ -3,8 +3,9 @@ import {
     html
 } from '@polymer/lit-element';
 import { EVENT_ANIME_PAGES_TRANSITION_END } from '../../components/anime-animated-pages.js';
+import { EVENT_RAIL_FIRST_PAINT, EVENT_RAIL_INTERACTIVE } from '../rail-performance-model.js';
 class UiRoot extends LitElement {
-    _render(props) {
+    _render({interactive}) {
         return html `
     <style>
         :host {
@@ -53,7 +54,7 @@ class UiRoot extends LitElement {
             margin-bottom: var(--content-margin);
             width: var(--content-max-width);
             max-width: var(--content-max-width);
-            min-height: calc(100% - var(--gutter-double));
+            min-height: calc(100vh - (var(--header-height) + var(--content-margin) * 2));
         }
 
         initial-view {
@@ -107,7 +108,7 @@ class UiRoot extends LitElement {
     </ui-manager>
     <span id="loadingText">... Loading ...</span>
     <awe-scenery id="scenery" folded></awe-scenery>
-    <tri-loading-indicator unresolved animate="${props.interactive === false}" rows=4 bitsPerRow=4></tri-loading-indicator>
+    <tri-loading-indicator unresolved animate="${interactive === false}" rows=4 bitsPerRow=4></tri-loading-indicator>
     `;
     }
 
@@ -134,7 +135,7 @@ class UiRoot extends LitElement {
             });
         });
 
-        this.addEventListener('rail-interactive', () => {
+        this.addEventListener(EVENT_RAIL_INTERACTIVE, () => {
             this.interactive = true;
             this.setAttribute("interactive", true);
         });
@@ -147,9 +148,13 @@ class UiRoot extends LitElement {
         /* jshint ignore:end */
     }
 
+    disconnectedCallback() {
+        this.removeEventListener(EVENT_ANIME_PAGES_TRANSITION_END);
+    }
+
     _firstRendered() {
         performance.mark('mark_boot_end');
-        performance.mark('mark_first_paint');
+        performance.mark(EVENT_RAIL_FIRST_PAINT);
     }
 }
 customElements.define('ui-root', UiRoot);

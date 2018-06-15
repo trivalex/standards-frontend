@@ -1,4 +1,4 @@
-export const ShellAppColors = `
+export const ColorsCSS = `
   --blue: #00a5ff;
   --glass-blue: rgba(255, 0, 0, 0.2);
   --milk-blue: rgba(255, 0, 0, 0.5);

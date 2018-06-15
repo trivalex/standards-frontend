@@ -3,6 +3,7 @@ import {
     html
 } from '@polymer/lit-element';
 import { UiPage } from '../infra/ui/UiPage';
+import { EVENT_RAIL_INTERACTIVE } from '../infra/rail-performance-model';
 
 class InitialView extends UiPage(LitElement) {
     _render({shallFetch}) {
@@ -52,7 +53,7 @@ class InitialView extends UiPage(LitElement) {
 
     connectedCallback() {
         super.connectedCallback();
-        performance.mark('mark_interactive');
+        performance.mark(EVENT_RAIL_INTERACTIVE);
         this.removeAttribute('unresolved');
         this.setAttribute("loading", true);
 

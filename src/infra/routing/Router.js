@@ -1,12 +1,6 @@
 import {
-    installRouter
-} from 'pwa-helpers/router.js';
-import {
     connect
 } from 'pwa-helpers/connect-mixin.js';
-import {
-    Routable
-} from './Routable';
 import {
     Route
 } from './Route';

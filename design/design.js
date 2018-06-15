@@ -1,18 +1,18 @@
 import '@webcomponents/shadycss/entrypoints/apply-shim.js';
 import {
-    ShellAppKeyframes
+    KeyframesCSS
 } from './keyframes';
 import {
-    ShellAppColors
+    ColorsCSS
 } from "./color";
 import {
-    ShellAppLayout
+    LayoutCSS
 } from "./layout";
 import {
-    ShellAppFonts
+    FontsCSS
 } from './fonts';
 import {
-    ShellAppGrid
+    GridCSS
 } from './grid';
 export const centerHorizontal = (width) => {
     return ((Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2) - width / 2);
@@ -20,17 +20,17 @@ export const centerHorizontal = (width) => {
 export const centerVertical = (height) => {
     return ((Math.max(document.documentElement.clientHeight, window.innerHeight || 0) / 2) - height / 2);
 };
-export const ShellAppTheme = `${ShellAppColors}
-${ShellAppLayout}
-${ShellAppGrid}
-${ShellAppFonts}
-${ShellAppKeyframes}`;
+export const ThemeCSS = `${ColorsCSS}
+${LayoutCSS}
+${GridCSS}
+${FontsCSS}
+${KeyframesCSS}`;
+window.dynamicStyleSpace[0] = `html { 
+    ${ThemeCSS}
+}`;
 window.renderCss = () => {
     return window.dynamicStyleSpace.join('\n');
 };
-window.dynamicStyleSpace[0] = `html { 
-    ${ShellAppTheme}
-}`;
 window.dynamicStyleTag.innerHTML = window.dynamicStyleSpace.join();
 export const loadViewportStyles = (event) => {
     clearTimeout(window.loadViewportStylesQueue);

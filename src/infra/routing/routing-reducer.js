@@ -10,16 +10,10 @@ export const routes = (state = {
     /* jshint ignore:start */
     switch (action.type) {
         case ADD_ROUTES:
-            if (action.routes === undefined) {
-                console.error();
-            }
             return { ...state,
                 routes: Array.from(state.routes).concat(action.routes)
             };
         case ADD_ROUTE:
-            if (action.route === undefined) {
-                console.error();
-            };
             let newRoutes = state.routes;
             newRoutes.push(action.route)
             return { ...state,
@@ -36,9 +30,6 @@ export const routeSelection = (state = {
     /* jshint ignore:start */
     switch (action.type) {
         case UPDATE_PAGE:
-            if (action.page === undefined) {
-                console.error();
-            }
             return { ...state,
                 selectedRoute: action.page
             };
