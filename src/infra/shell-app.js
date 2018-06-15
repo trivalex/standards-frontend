@@ -1,3 +1,5 @@
+export const APP_TITLE = "Shell App";
+
 class ShellApp extends HTMLElement {
   constructor() {
     super();
@@ -12,4 +14,5 @@ class ShellApp extends HTMLElement {
     /* jshint ignore:end */
   }
 }
+
 window.customElements.define('shell-app', ShellApp);
