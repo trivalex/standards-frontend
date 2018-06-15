@@ -81,7 +81,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
                 grid-template-rows: var(--framed-icon-size) calc(100vh - (var(--framed-icon-size) + (var(--gutter-default) * 4)) );
                 grid-template-columns: var(--app-drawer-width);
                 grid-gap: var(--gutter-default);
-                font-size: var(--fluid-fontsize-c);
+                font-size: var(--fluid-fontsize-b);
                 text-align: center;
             };
         }

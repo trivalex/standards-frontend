@@ -21,7 +21,7 @@ class InitialView extends UiPage(LitElement) {
             div {
                 padding: var(--content-padding);
                 max-width: calc(var(--content-max-width) - var(--gutter-double));
-                font-size: var(--fluid-fontsize-c);
+                font-size: var(--fluid-fontsize-d);
             }
         </style>
         <div collapsed="${this.data}">
