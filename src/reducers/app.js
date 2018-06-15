@@ -8,9 +8,13 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { UPDATE_OFFLINE } from '../actions/app.js';
+import {
+  UPDATE_OFFLINE
+} from '../actions/app.js';
 
-const app = (state = {drawerOpened: false}, action) => {
+const app = (state = {
+  drawerOpened: false
+}, action) => {
   switch (action.type) {
     case UPDATE_OFFLINE:
       return {

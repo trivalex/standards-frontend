@@ -1,6 +1,5 @@
 export class Route {
-    constructor(componentUri, routePath) {
-        this.componentUri = componentUri;
+    constructor(routePath) {
         this.routePath = routePath;
     }
 }

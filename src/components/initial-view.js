@@ -2,11 +2,30 @@ import {
     LitElement,
     html
 } from '@polymer/lit-element';
+import { UiPage } from '../infra/ui/UiPage';
 
-class InitialView extends LitElement {
-    _render() {
+class InitialView extends UiPage(LitElement) {
+    _render({shallFetch}) {
         return html `
-        ${(this.data)? this.data : "fetching text..."}
+        <style>
+            :host {
+                display: none;
+            }
+
+            [collapsed="true"] {
+                width: inherit;
+                height: var(--medium-card-size, 200px);
+            }
+
+            div {
+                padding: var(--content-padding);
+                max-width: calc(var(--content-max-width) - var(--gutter-double));
+                font-size: var(--fluid-fontsize-c);
+            }
+        </style>
+        <div collapsed="${this.data}">
+            ${(this.data)? this.data : (shallFetch) ? "fetching text..." : " Dummy content"}
+        </div>
 `;
     }
 
@@ -22,6 +41,11 @@ class InitialView extends LitElement {
                 type: Object,
                 notify: true,
                 value: null
+            },
+            shallFetch: {
+                type: Boolean,
+                reflectToAttribute: true,
+                value: false,
             }
         };
     }
@@ -35,16 +59,13 @@ class InitialView extends LitElement {
         setTimeout(() => {
             this.removeAttribute('loading');
             this.setAttribute("ready", true);
-            let interactiveEvent = new CustomEvent('rail-interactive', {
-                bubbles: true,
-                composed: true,
-                scoped: false
-            });
-            this.dispatchEvent(interactiveEvent);
+
+            if (this.shallFetch) {
+                fetch("https://baconipsum.com/api/?type=meat-and-filler&paras=15&start-with-lorem=1")
+                    .then((r) => r.text().then((r) => this.data = r.replace('["', '').replace('"]', '')))
+                    .catch((e) => e);
+            }
         }, 50);
-        fetch("https://baconipsum.com/api/?type=meat-and-filler&paras=25&start-with-lorem=1")
-            .then((r) => r.text().then((r) => this.data = r.replace('["', '').replace('"]', '')))
-            .catch((e) => e);
     }
 }
 customElements.define("initial-view", InitialView);

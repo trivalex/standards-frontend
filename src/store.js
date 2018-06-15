@@ -27,8 +27,3 @@ export const store = createStore(
   (state, action) => state,
   compose(lazyReducerEnhancer(combineReducers), applyMiddleware(thunk))
 );
-
-// Initially loaded reducers.
-store.addReducers({
-  app
-});

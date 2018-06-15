@@ -5,14 +5,17 @@
   "hosting": {
     "public": "build/es6-bundled",
     "rewrites": [{
-      "source": "/",
+      "source": "**",
       "destination": "/index.html"
     }],
     "headers": [{
-      "source": "/",
+      "source": "**",
       "headers": [{
         "key": "Link",
-        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;nopush;as=script,</design/512max-px.js>;rel=preload;nopush;as=script,</src/infra/ui/ui-root.js>;rel=preload;nopush;as=script,</src/components/tri-loading-indicator.js>;rel=preload;nopush;as=script,</src/components/initial-view.js>;rel=preload;nopush;as=script,</src/infra/dependency-resolver/dependency-resolver.js>;rel=preload;nopush;as=script"
+        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;nopush;as=script,</design/512max-px.js>;rel=preload;nopush;as=script,</design/design.js>;rel=preload;nopush;as=script,</src/infra/ui/ui-root.js>;rel=preload;nopush;as=script,</src/components/tri-loading-indicator.js>;rel=preload;nopush;as=script,</src/components/initial-view.js>;rel=preload;nopush;as=script,</src/infra/dependency-resolver/dependency-resolver.js>;rel=preload;nopush;as=script"
+      }, {
+        "key": "cache-control",
+        "value": "max-age=86400"
       }]
     }]
   }

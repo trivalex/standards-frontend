@@ -14,30 +14,40 @@ import {
     addRoute
 } from './routing-actions';
 
+export const EVENT_ROUTING = 'EVENT_ROUTING';
+
 export const router = (store) => (baseElement) => class extends connect(store)(baseElement) {
 
-    navigate(e) {console.log(e);}
+    navigate(e) {
+        console.log(e);
+    }
 
-    hydrateRouteDataFromElements(elements) {
+    addRouteDataViaElements(elements) {
         if (!Array.isArray(elements)) return;
-        elements.forEach((element) => {this.addRouteFromElement(element);});
+        elements.forEach((element) => this.addRouteDataViaElement(element));
     }
 
-    addRouteFromElement(element) {
-        if (!this.isRoutable(element)) {
-            console.debug("Tried to create a route from an element that was not routable", element);
-            return;
-        }
-        store.dispatch(addRoute(new Route(element.routePath, element.componentUri)));
+    addRouteDataViaElement(element) {
+        if (!this.isRoutable(element)) return;
+        store.dispatch(addRoute(new Route(element.routePath)));
     }
 
-    reduceRouteDataFromElements(elements) {}
+    removeRouteDataViaElements(elements) {
+        if (!Array.isArray(elements)) return;
+        elements.forEach((element) => this.removeRouteDataViaElement(element));
+    }
+    removeRouteDataViaElement(elements) {}
+
     isRoutable(something) {
         return something.isRoutable !== undefined && typeof something.isRoutable === "function" && something.isRoutable();
     }
 
-    // // This s called every time something is updated in the store.
-    _stateChanged(state) {}
+    _stateChanged(state) {
+        if (state && state.routeSelection) {
+            this.dispatchEvent(new CustomEvent(EVENT_ROUTING, {
+                bubbles: true,
+                composed: true
+            }));
+        }
+    }
 };
-
-export const routes = [];

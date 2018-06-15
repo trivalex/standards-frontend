@@ -1,6 +1,6 @@
 import {
-    LitElement,
-    html
+    html,
+    LitElement
 } from '@polymer/lit-element';
 import {
     timeOut
@@ -147,7 +147,7 @@ class TriLoadingIndicator extends LitElement {
             }).finished;
 
         a.then((anim) => {
-            if (this.animate == true && repeat) {
+            if (this.animate === true && repeat) {
                 this.loadAnimation(div, repeat);
                 return;
             }
@@ -155,10 +155,10 @@ class TriLoadingIndicator extends LitElement {
                 setTimeout(() => {
                     if (div.parentNode.classList.contains("left") || div.parentNode.classList.contains("right")) {
                         div.classList.add("color-a");
-                    };
+                    }
                     if (div.parentNode.classList.contains("back") || div.parentNode.classList.contains("front")) {
                         div.classList.add("color-b");
-                    };
+                    }
                     this.setAttribute("interactive", true);
                     this.loadAnimation(div, false);
                 }, 500);

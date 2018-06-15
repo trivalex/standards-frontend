@@ -1,3 +1,5 @@
+export const APP_TITLE = "Shell App";
+
 class ShellApp extends HTMLElement {
   constructor() {
     super();

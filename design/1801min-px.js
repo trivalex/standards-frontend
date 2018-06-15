@@ -1,7 +1,6 @@
 window.dynamicStyleSpace[5] = `
 @media (min-width: 1801px) {
     html {
-        --test-color-a: blue;
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --header-height: calc(var(--gutter-default) * 8);
         --content-max-width: var(--viewport-large);

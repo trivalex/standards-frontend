@@ -6,7 +6,7 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "design/**",
+    "design/**/*",
     "node_modules/@webcomponents/webcomponentsjs/**/*",
     "push-manifest.json",
     "src/components/**/*"

@@ -122,7 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         NODE_ENV: 'production'
       }
     };
-    window.dynamicStyleSpace = ["","","","","","",""];
+    window.dynamicStyleSpace = ["", "", "", "", "", "", ""];
     window.dynamicStyleTag = document.createElement('style');
     document.head.append(window.dynamicStyleTag);
   </script>
@@ -134,6 +134,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/Q_Z9mv4hySLTMoMjnk_rCXYhjbSpvc47ee6xR_80Hnw.woff2) format('woff2');
     }
 
+    html {
+      font-size: 1em;
+    }
+
     body {
       margin: 0;
       /* This is a font-stack that tries to use the system-default sans-serifs first */
@@ -142,6 +146,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       background: #333;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: var(--gutter-default);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--milk-grey);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--view-primary-glass-color);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--view-primary-color);
     }
   </style>
 </head>

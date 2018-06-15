@@ -1,7 +1,6 @@
 window.dynamicStyleSpace[1] = `
 @media (max-width: 512px) {
     html {
-        --test-color-a: red;
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --header-height: calc(var(--gutter-default) * 4);
         --content-max-width: var(--viewport-xsmall);
@@ -10,11 +9,23 @@ window.dynamicStyleSpace[1] = `
         --notification-min-width: 100%;
         --notification-width: 100%;
         --notification-max-width: 100%;
+        --icon-size: 24px;
         --small-card-size: 100px;
         --medium-card-size: calc(200px + var(--gutter-double));
         --large-card-size: calc(300px + var(--gutter-double) + var(--gutter-double));
-        --viewport-xsmall: calc(100vw - var(--content-padding) * 2);
         --content-left: 0px;
+        --app-drawer-content-width: calc(var(--app-drawer-width) - var(--gutter-default));
+    }
+}
+@media (min-width: 1px) and (max-width: 512px) {
+    html {
+        --viewport-xsmall: 100vw;
+    }
+}
+@media (min-width: 1px) and (max-width: 216px) {
+    html {
+        --app-drawer-width: var(--viewport-xsmall);
+        --app-drawer-content-width: calc(var(--app-drawer-width) - var(--gutter-default));
     }
 }
 `;
