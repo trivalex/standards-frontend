@@ -122,9 +122,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         NODE_ENV: 'production'
       }
     };
-    window.dynamicStyleSpace = ["", "", "", "", "", "", ""];
+    window.dynamicStyleSpace = [];
     window.dynamicStyleTag = document.createElement('style');
     document.head.append(window.dynamicStyleTag);
+    document.addEventListener('rail-interactive', () => {
+      document.getElementById("loadingText").setAttribute("hidden", true);
+      document.getElementById("loadingIndicator").removeAttribute("animate");
+      document.getElementById("loadingIndicator").setAttribute("interactive", true);
+    });
   </script>
   <style>
     @font-face {
@@ -142,7 +147,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       margin: 0;
       /* This is a font-stack that tries to use the system-default sans-serifs first */
       font-family: Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      line-height: 1.5;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       background: #333;
@@ -164,17 +168,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     ::-webkit-scrollbar-thumb:hover {
       background: var(--view-primary-color);
     }
+        awe-loading-indicator {
+            position: fixed;
+            --awe-li-size: var(--small-card-size);
+            --awe-li-bg-color: var(--view-primary-glass-color);
+            --awe-li-color-a:var(--view-primary-glass-color);
+            --awe-li-color-b:var(--view-primary-glass-color);
+            left: calc(50vw - var(--small-card-size) / 2);
+            top: calc(50vh  - var(--small-card-size) / 2);
+            transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); /* custom */
+            z-index: 10000;
+        }
+
+        awe-loading-indicator[interactive] {
+            opacity: 0.1;
+            z-index: 300;
+        }
+        
+        awe-loading-indicator[unresolved] {
+            opacity: 0;
+        }
+    #loadingText {
+        color: white;
+        position: fixed;
+        margin: calc(50vw - (50vw /2));
+        width: 50vw;
+        font-size: 32px;
+        text-align: center;
+        bottom: 32px;
+    }
   </style>
 </head>
 
 <body>
+  <span id="loadingText">... Loading ...</span>
+  <awe-loading-indicator id="loadingIndicator" unresolved rows=4 bitsPerRow=4></awe-loading-indicator>
   <shell-app></shell-app>
-  <noscript>
-    Please enable JavaScript to view this website.
-  </noscript>
+  <noscript>Please enable JavaScript to view this website.</noscript>
   <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script defer type="module" src="src/components/tri-loading-indicator.js"></script>
-  <script defer type="module" src="src/infra/shell-app.js" crossorigin>Loading</script>
+  <script async defer type="module" src="src/main/shell-app.js" crossorigin>Loading</script>
 </body>
 
 </html>

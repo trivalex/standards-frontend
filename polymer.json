@@ -1,6 +1,6 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/infra/shell-app.js",
+  "shell": "src/main/shell-app.js",
   "sources": [
     "images/**/*"
   ],
@@ -8,8 +8,7 @@
     "manifest.json",
     "design/**/*",
     "node_modules/@webcomponents/webcomponentsjs/**/*",
-    "push-manifest.json",
-    "src/components/**/*"
+    "push-manifest.json"
   ],
   "builds": [
     {

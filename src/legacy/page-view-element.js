@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import {
   LitElement
 } from '@polymer/lit-element';
-import { UiRoutable } from "../infra/ui/UiRoutable.js";
+import { UiRoutable } from "../main/ui/UiRoutable.js";
 
 export class PageViewElement extends UiRoutable(LitElement) {
   // Only render this page if it's actually visible.

@@ -9,6 +9,7 @@ export const LayoutCSS = `
     --gutter-double: 32px;
     --content-margin: var(--gutter-default);
     --content-padding: var(--gutter-default);
+    --content-left: calc(50vw - ((var(--content-max-width) / 2) + (var(--content-margin) * 2)));
     --notification-min-height: 48px;
     --notification-height: 48px;
     --notification-max-height: 48px;
