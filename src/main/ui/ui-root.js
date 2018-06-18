@@ -1,12 +1,8 @@
-import {
-    LitElement,
-    html
-} from '@polymer/lit-element';
 import { EVENT_ANIME_PAGES_TRANSITION_END } from '../../components/anime-animation/anime-animated-pages/anime-animated-pages.js';
-import { EVENT_RAIL_FIRST_PAINT, EVENT_RAIL_INTERACTIVE } from '../../components/rail-performance/rail-performance-model';
-class UiRoot extends LitElement {
-    _render({interactive}) {
-        return html `
+
+class UiRoot extends HTMLElement {
+    template() {
+        return `
     <style>
         :host {
             display: block;
@@ -41,7 +37,7 @@ class UiRoot extends LitElement {
 
         awe-scenery {
             position: fixed;
-            --awe-card-color: var(--view-primary-glass-color);
+            --awe-card-color: var(--app-primary-glass-color);
             z-index: 0;
         }
     </style>
@@ -69,33 +65,27 @@ class UiRoot extends LitElement {
 
     constructor() {
         super();
+
+        let tmpl = document.createElement('template');
+        tmpl.innerHTML = this.template();
+        let shadowRoot = this.attachShadow({
+          mode: 'open'
+        });
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
         /* jshint ignore:start */
+        import('../../components/awe-decoration/awe-loading-indicator/awe-loading-indicator.js');
         import('../../domain/hello-world/initial-page.js').then(() => {
             import('../../../design/design.js').then(() => {
                 import('./ui-manager.js');
                 import('../../components/awe-decoration/awe-scenery/awe-scenery.js');
             });
         });
-
-        this.addEventListener(EVENT_RAIL_INTERACTIVE, () => {
-            this.interactive = true;
-            this.setAttribute("interactive", true);
-        });
+        /* jshint ignore:end */
 
         this.addEventListener(EVENT_ANIME_PAGES_TRANSITION_END, () => {
             this.shadowRoot.getElementById("scenery").removeAttribute("folded");
         });
-        
-        /* jshint ignore:end */
-    }
-
-    disconnectedCallback() {
-        this.removeEventListener(EVENT_ANIME_PAGES_TRANSITION_END);
-    }
-
-    _firstRendered() {
-        performance.mark('mark_boot_end');
-        performance.mark(EVENT_RAIL_FIRST_PAINT);
     }
 }
 customElements.define('ui-root', UiRoot);

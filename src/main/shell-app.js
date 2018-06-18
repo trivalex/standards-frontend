@@ -1,5 +1,4 @@
 export const APP_TITLE = "Shell App";
-import "../components/awe-decoration/awe-loading-indicator/awe-loading-indicator.js";
 class ShellApp extends HTMLElement {
   constructor() {
     super();
@@ -13,8 +12,6 @@ class ShellApp extends HTMLElement {
     import('../components/dependency-resolver/dependency-resolver.js').then(() => {
       import('../main/ui/ui-root.js');
     });
-    import('../domain/hello-world/initial-page.js');
-    import('../components/anime-animation/anime-animated-pages/anime-animated-pages.js');
     /* jshint ignore:end */
   }
 }

@@ -28,7 +28,7 @@ import {
     ui
 } from './ui-reducer';
 import { EVENT_ANIME_PAGES_TRANSITION_START } from '../../components/anime-animation/anime-animated-pages/anime-animated-pages.js';
-import { EVENT_RAIL_INTERACTIVE, RAIL_SLIGHT_DELAY } from '../../components/rail-performance/rail-performance-model';
+import { EVENT_RAIL_INTERACTIVE, RAIL_SLIGHT_DELAY, EVENT_RAIL_FIRST_PAINT } from '../../components/rail-performance/rail-performance-model';
 import { iconMenu, iconAccount, iconSettings, iconInfo } from './ui-icons';
 store.addReducers({
     routes,
@@ -40,7 +40,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
     _render({
         drawerOpened,
-        ready,
         routes,
         selectedRoute
     }) {
@@ -58,7 +57,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             left: 0;
             width: 100%;
             text-align: center;
-            background-color:  var(--view-primary-glass-color);
+            background-color:  var(--app-primary-glass-color);
             color: var(--app-header-text-color);
             border-bottom: 1px solid var(--milk-white);
             min-height: var(--header-height);
@@ -78,7 +77,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             top: 0px;
             --app-drawer-scrim-background: var(--milk-grey);
             --app-drawer-content-container: {
-                background-color: var(--view-primary-glass-color);
+                background-color: var(--app-primary-glass-color);
                 height: 100vh;
                 padding: var(--gutter-default) 0px;
                 width: var(--app-drawer-width);
@@ -123,7 +122,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         }
 
         button {
-            background: var(--view-primary-glass-color);
+            background: var(--app-primary-glass-color);
             border: none;
             fill: var(--app-header-text-color);
             cursor: pointer;
@@ -158,10 +157,10 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             background: var(--milk-grey);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--view-primary-glass-color);
+            background: var(--app-primary-glass-color);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--view-primary-color);
+            background: var(--app-primary-color);
         }
     </style>
     <app-header id="header" unresolved="true" condenses reveals effects="waterfall">
@@ -211,7 +210,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
     _wireDependencies() {
         /* jshint ignore:start */
-        import("../../main/routing/routing-service.js").then(() => {
+        import("../routing/routing-service.js").then(() => {
             this._pageObserver = new FlattenedNodesObserver(this.shadowRoot.getElementById("pages"), (info) => {
                 this.routingService = this._wireDependency(this.routingService, "routing-service");
 
@@ -226,7 +225,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
     connectedCallback() {
         super.connectedCallback();
         /* jshint ignore:start */
-
         import('../../components/anime-animation/anime-animated-pages/anime-animated-pages.js').then(() => {
             import('./ui-deferred-dependencies.js').then(() => {
                 this.shadowRoot.getElementById("header").removeAttribute("unresolved");
@@ -245,6 +243,8 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             if(this.shadowRoot.getElementById("drawer").close) this.shadowRoot.getElementById("drawer").close();
         });
         /* jshint ignore:end */
+        performance.mark('mark_boot_end');
+        performance.mark(EVENT_RAIL_FIRST_PAINT);
     }
 
     disconnectedCallback() {

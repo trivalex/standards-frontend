@@ -1,14 +1,23 @@
-import './AnimatablePage.js';
 import '../../../../node_modules/animejs/anime.js';
-import { SLIDE_FROM_BOTTOM_FADE, SLIDE_TOP_FADE, SLIDE_BOTTOM_FADE, SLIDE_FROM_TOP_FADE, GROW_FADE } from '../anime-animations/anime-animations.js';
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import './AnimatablePage.js';
+import {
+  SLIDE_FROM_BOTTOM_FADE,
+  SLIDE_TOP_FADE,
+  SLIDE_BOTTOM_FADE,
+  SLIDE_FROM_TOP_FADE,
+  GROW_FADE
+} from '../anime-animations/anime-animations.js';
+import {
+  PolymerElement,
+  html
+} from '@polymer/polymer/polymer-element.js';
 
 export const EVENT_ANIME_PAGES_TRANSITION_START = 'anime-animated-pages-transition-start';
 export const EVENT_ANIME_PAGES_TRANSITION_END = 'anime-animated-pages-transition-end';
 
 class AnimeAnimatedPages extends PolymerElement {
   static get template() {
-    return html`
+    return html `
     <style>
       :host> ::slotted(*) {
         display: none;
@@ -97,65 +106,50 @@ class AnimeAnimatedPages extends PolymerElement {
     }));
 
     if (exitPage !== null && exitPage !== undefined) {
-        setTimeout(() => {
-          exitPage.removeAttribute("anime-current-page");
-        }, this.routeInDuration);
+      setTimeout(() => {
+        exitPage.removeAttribute("anime-current-page");
+      }, this.routeInDuration);
     }
-    entryPage.setAttribute("anime-current-page", true);
-    let a;
-    if (this.initialAnimation) {
-      this.set('initialAnimation', false);
-        if (entryPage !== undefined) {
-          a = anime(GROW_FADE(entryPage, this.routeOutDuration, this.routeDebounce)).finished;
-          a.then(() => {
-            entryPage.transitionInCallback();
-            this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
-              bubbles: true,
-              composed: true
-            }));
-          });
-        }
-        if (exitPage !== undefined) {
-          exitPage.transitionOutCallback();
-          anime(SLIDE_BOTTOM_FADE(exitPage, this.routeInDuration, this.routeDebounce));
-        }
-    } else {
-      if (entryPageIndex <= exitPageIndex) {
-        if (entryPage !== undefined) {
-          a = anime(SLIDE_FROM_TOP_FADE(entryPage, this.routeInDuration, this.routeDebounce)).finished;
-          a.then(() => {
-            entryPage.transitionInCallback();
-            this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
-              bubbles: true,
-              composed: true
-            }));
-          });
-        }
-        if (exitPage !== undefined) {
-          exitPage.transitionOutCallback();
-          anime(SLIDE_BOTTOM_FADE(exitPage, this.routeInDuration, this.routeDebounce));
-        }
-      }
 
-      if (entryPageIndex > exitPageIndex) {
-        if (entryPage !== undefined) {
-          a = anime(SLIDE_FROM_BOTTOM_FADE(entryPage, this.routeOutDuration, this.routeDebounce)).finished;
-          a.then(() => {
-            entryPage.transitionInCallback();
-            this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
-              bubbles: true,
-              composed: true
-            }));
-          });
+    if (entryPage !== undefined) {
+      entryPage.setAttribute("anime-current-page", true);
+      
+      if (this.initialAnimation) {
+        this.set('initialAnimation', false);
+        this._animateEntry(entryPage, GROW_FADE);
+        this._animateExit(exitPage, SLIDE_BOTTOM_FADE);
+      } else {
+        if (entryPageIndex <= exitPageIndex) {
+          this._animateEntry(entryPage, SLIDE_FROM_TOP_FADE);
+          this._animateExit(exitPage, SLIDE_BOTTOM_FADE);
         }
-        if (exitPage !== undefined) {
-          exitPage.transitionOutCallback();
-          anime(SLIDE_TOP_FADE(exitPage, this.routeOutDuration, this.routeDebounce));
+
+        if (entryPageIndex > exitPageIndex) {
+          this._animateEntry(entryPage, SLIDE_FROM_BOTTOM_FADE);
+          this._animateExit(exitPage, SLIDE_TOP_FADE);
         }
       }
     }
 
     this.currentPage = selected;
+  }
+
+  _animateEntry(entryPage, animation) {
+    let a = anime(animation(entryPage, this.routeOutDuration, this.routeDebounce)).finished;
+    a.then(() => {
+      entryPage.transitionInCallback();
+      this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
+        bubbles: true,
+        composed: true
+      }));
+    });
+  }
+
+  _animateExit(exitPage, animation) {
+    if (exitPage !== undefined) {
+      exitPage.transitionOutCallback();
+      anime(animation(exitPage, this.routeOutDuration, this.routeDebounce));
+    }
   }
 }
 

@@ -1,15 +1,7 @@
-import {
-    html,
-    LitElement
-} from '@polymer/lit-element';
-import {
-    timeOut
-} from '@polymer/polymer/lib/utils/async.js';
 import '../../../../node_modules/animejs/anime.js';
-import { RAIL_SLIGHT_DELAY } from '../../rail-performance/rail-performance-model.js';
-class AweLoadingIndicator extends LitElement {
-    _render() {
-        return html `
+class AweLoadingIndicator extends HTMLElement {
+    template () {
+        return `
 <style>
     :host {
         perspective: 250px;
@@ -72,10 +64,6 @@ class AweLoadingIndicator extends LitElement {
     </div>
     <div class="side right">
     </div>
-    <!-- <div class="side top">
-    </div> -->
-    <!-- <div class="side bottom">
-    </div> -->
     <div class="side front">
     </div>
 </div>
@@ -88,26 +76,20 @@ class AweLoadingIndicator extends LitElement {
                 type: Boolean,
                 reflectToAttribute: true
             },
-            rows: {
-                type: Number,
-                reflectToAttribute: true,
-                notify: true,
-                value: 3
-            },
-            bitsPerRow: {
-                type: Number,
-                reflectToAttribute: true,
-                notify: true,
-                value: 4
-            },
         };
     }
 
     connectedCallback() {
-        super.connectedCallback();
-        timeOut.after(50).run(() => {
-            this._hydrateDOM(this.shadowRoot.getElementById("first"), this.rows, "first");
+        let tmpl = document.createElement('template');
+        tmpl.innerHTML = this.template();
+        let shadowRoot = this.attachShadow({
+          mode: 'open'
         });
+        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
+        setTimeout(() => {
+            this._hydrateDOM(this.shadowRoot.getElementById("first"), 4, "first");
+        }, 50);
         this.removeAttribute('unresolved');
     }
 
@@ -125,7 +107,7 @@ class AweLoadingIndicator extends LitElement {
     }
 
     loadAnimation(div, repeat) {
-        let t = ((Math.random() * RAIL_SLIGHT_DELAY)),
+        let t = ((Math.random() * 300)),
             a = anime({
                 targets: div,
                 delay: t,
@@ -163,10 +145,6 @@ class AweLoadingIndicator extends LitElement {
                 }, 500);
             }
         });
-    }
-
-    disconectedCallback() {
-        this.shadowRoot.getElementById("cube").children = new HTMLCollection();
     }
 }
 customElements.define("awe-loading-indicator", AweLoadingIndicator);
