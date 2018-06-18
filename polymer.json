@@ -6,32 +6,44 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "design/**/*",
+    "design/responsive/**/*",
     "node_modules/@webcomponents/webcomponentsjs/**/*",
     "push-manifest.json"
   ],
-  "builds": [
-    {
-      "name": "es6-bundled",
-      "browserCapabilities": [
-        "es2015",
-        "serviceworker"
-      ],
-      "js": {
-        "compile": true,
-        "minify": true,
-        "transformModulesToAmd": true
-      },
-      "css": {
-        "minify": true
-      },
-      "html": {
-        "minify": true
-      },
-      "bundle": true,
-      "addServiceWorker": true
-    }
+  "fragments": [
+    "src/domain/hello-world/initial-page.js",
+    "src/components/awe-decoration/awe-loading-indicator/awe-loading-indicator.js",
+    "src/components/awe-decoration/awe-scenery/awe-scenery.js",
+    "src/components/dependency-resolver/dependency-resolver.js",
+    "src/components/dependency-resolver/Dependant.js",
+    "src/components/anime-animation/anime-animated-pages/anime-animated-pages.js",
+    "src/components/anime-animation/anime-animations/anime-animations.js",
+    "src/main/routing/routing-service.js",
+    "src/main/ui/ui-root.js",
+    "src/main/ui/ui-manager.js",
+    "src/main/ui/ui-deferred-dependencies.js",
+    "src/main/ui/ui-navigation-dependencies.js"
   ],
+  "builds": [{
+    "name": "es6-bundled",
+    "browserCapabilities": [
+      "es2015",
+      "serviceworker"
+    ],
+    "js": {
+      "compile": true,
+      "minify": true,
+      "transformModulesToAmd": true
+    },
+    "css": {
+      "minify": true
+    },
+    "html": {
+      "minify": true
+    },
+    "bundle": true,
+    "addServiceWorker": true
+  }],
   "moduleResolution": "node",
   "npm": true
 }

@@ -7,6 +7,13 @@ import {
 import {
     installRouter
 } from 'pwa-helpers/router';
+import {
+    routes,
+    routeSelection
+} from '../routing/routing-reducer';store.addReducers({
+    routes,
+    routeSelection
+});
 class RoutingService extends router(store)(HTMLElement) {
 
     constructor() {

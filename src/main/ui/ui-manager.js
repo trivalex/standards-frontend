@@ -21,18 +21,12 @@ import {
     store
 } from '../../main/store';
 import {
-    routes,
-    routeSelection
-} from '../routing/routing-reducer';
-import {
     ui
 } from './ui-reducer';
 import { EVENT_ANIME_PAGES_TRANSITION_START } from '../../components/anime-animation/anime-animated-pages/anime-animated-pages.js';
 import { EVENT_RAIL_INTERACTIVE, RAIL_SLIGHT_DELAY, EVENT_RAIL_FIRST_PAINT } from '../../components/rail-performance/rail-performance-model';
 import { iconMenu, iconAccount, iconSettings, iconInfo } from './ui-icons';
 store.addReducers({
-    routes,
-    routeSelection,
     ui
 });
 
