@@ -2,13 +2,13 @@ export const SLIDE_FROM_TOP_FADE = (el, dur, debounce) => {
     return {
         targets: el,
         opacity: [{
-            value: 0.5,
+            value: 0,
             duration: 10,
             delay: 0
         }, {
             value: 1,
-            duration: dur - 100,
-            delay: 100 + debounce
+            duration: dur - 10,
+            delay: 10 + debounce
         }],
         top: [{
             value: '-200vh',
@@ -27,20 +27,21 @@ export const SLIDE_FROM_TOP_FADE = (el, dur, debounce) => {
             duration: 10,
             delay: 5 + debounce
         }],
-        easing: 'easeInOutQuart'
+        easing: 'easeInOutQuart',
+        duration: dur
     };
 };
 export const SLIDE_FROM_BOTTOM_FADE = (el, dur, debounce) => {
     return {
         targets: el,
         opacity: [{
-            value: 0.5,
+            value: 0,
             duration: 10,
             delay: 0
         }, {
             value: 1,
-            duration: dur - 100,
-            delay: 100 + debounce
+            duration: dur - 10,
+            delay: 10 + debounce
         }],
         top: [{
             value: '200vh',
@@ -59,14 +60,15 @@ export const SLIDE_FROM_BOTTOM_FADE = (el, dur, debounce) => {
             duration: 10,
             delay: 5 + debounce
         }],
-        easing: 'easeInOutQuart'
+        easing: 'easeInOutQuart',
+        duration: dur
     };
 };
 export const SLIDE_TOP_FADE = (el, dur, debounce) => {
     return {
         targets: el,
         opacity: [{
-            value: 0.2,
+            value: 0,
             duration: dur,
             delay: 0
         }],
@@ -83,7 +85,14 @@ export const SLIDE_TOP_FADE = (el, dur, debounce) => {
             duration: 10,
             delay: 5 + debounce
         }],
-        easing: 'easeInOutQuart'
+        display: [{
+            value: "block",
+        },{
+            value: "none",
+            delay: dur
+        }],
+        easing: 'easeInOutQuart',
+        duration: dur
     };
 };
 export const SLIDE_BOTTOM_FADE = (el, dur, debounce) => {
@@ -107,7 +116,14 @@ export const SLIDE_BOTTOM_FADE = (el, dur, debounce) => {
             duration: 10,
             delay: 5 + debounce
         }],
-        easing: 'easeInOutQuart'
+        display: [{
+            value: "block",
+        },{
+            value: "none",
+            delay: dur
+        }],
+        easing: 'easeInOutQuart',
+        duration: dur
     };
 };
 export const GROW_FADE = (el, dur, debounce) => {
@@ -122,12 +138,13 @@ export const GROW_FADE = (el, dur, debounce) => {
             duration: dur - 100
         }],
         top: {
-            value: 0,
+            value: "inherit",
             duration: dur,
             delay: 100 + debounce
         },
         zIndex: 1000,
-        easing: 'easeInOutQuart'
+        easing: 'easeInOutQuart',
+        duration: dur
     };
 };
 

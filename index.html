@@ -127,8 +127,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     document.head.append(window.dynamicStyleTag);
     document.addEventListener('rail-interactive', () => {
       document.getElementById("loadingText").setAttribute("hidden", true);
-      document.getElementById("loadingIndicator").removeAttribute("animate");
-      document.getElementById("loadingIndicator").setAttribute("interactive", true);
+      // document.getElementById("loadingIndicator").removeAttribute("animate");
+      // document.getElementById("loadingIndicator").setAttribute("interactive", true);
     });
   </script>
   <style>
@@ -163,21 +163,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     ::-webkit-scrollbar-thumb {
-      background: var(--app-primary-glass-color);
+      background: var(--standard-primary-glass-color);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--app-primary-color);
+      background: var(--standard-primary-color);
     }
-        awe-loading-indicator {
+        /* awe-loading-indicator {
             position: fixed;
             --awe-li-size: var(--small-card-size);
-            --awe-li-bg-color: var(--app-primary-glass-color);
-            --awe-li-color-a:var(--app-primary-glass-color);
-            --awe-li-color-b:var(--app-primary-glass-color);
+            --awe-li-bg-color: var(--standard-primary-glass-color);
+            --awe-li-color-a:var(--standard-primary-glass-color);
+            --awe-li-color-b:var(--standard-primary-glass-color);
             left: calc(50vw - var(--small-card-size) / 2);
             top: calc(50vh  - var(--small-card-size) / 2);
-            transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000); /* custom */
+            transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000);
             z-index: 10000;
         }
 
@@ -188,7 +188,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
         awe-loading-indicator[unresolved] {
             opacity: 0;
-        }
+        } */
     #loadingText {
         color: white;
         position: fixed;
@@ -203,7 +203,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body>
   <span id="loadingText">Shell App</span>
-  <awe-loading-indicator id="loadingIndicator" unresolved rows=4 bitsPerRow=4></awe-loading-indicator>
   <shell-app></shell-app>
   <noscript>Please enable JavaScript to view this website.</noscript>
   <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>

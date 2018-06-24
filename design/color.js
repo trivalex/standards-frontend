@@ -19,14 +19,14 @@ export const ColorsCSS = `
   --warn-glass-color: rgb(255, 150, 75, 0.5);
   --critical-glass-color: rgb(255, 75, 75, 0.5);
 
-  --app-primary-color: rgb(0, 110, 255);
-  --app-secondary-color: var(--milk-white);
-  --app-tetiary-color: rgb(70, 70, 70);
-  --app-primary-glass-color: rgba(0, 110, 255, 0.5);
-  --app-secondary-glass-color: var(--milk-white);
-  --app-tetiary-glass-color: rgba(70, 70, 70, 0.4);
-  --app-dark-text-color: var(--app-tetiary-color);
-  --app-light-text-color: white;
-  --app-section-even-color: #f7f7f7;
-  --app-section-odd-color: white;
+  --standard-primary-color: rgb(0, 110, 255);
+  --standard-secondary-color: var(--milk-white);
+  --standard-tetiary-color: rgb(70, 70, 70);
+  --standard-primary-glass-color: rgba(0, 110, 255, 0.5);
+  --standard-secondary-glass-color: var(--milk-white);
+  --standard-tetiary-glass-color: rgba(70, 70, 70, 0.4);
+  --standard-dark-text-color: var(--standard-tetiary-color);
+  --standard-light-text-color: white;
+  --standard-section-even-color: #f7f7f7;
+  --standard-section-odd-color: white;
 `;

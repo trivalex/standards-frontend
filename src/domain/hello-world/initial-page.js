@@ -5,25 +5,19 @@ import {
 import { UiPage } from '../../main/ui/UiPage';
 
 class InitialView extends UiPage(LitElement) {
-    _render({shallFetch}) {
+    _render({ready, shallFetch}) {
         return html `
         <style>
-            :host {
+            :host([unresolved]) *{
                 display: none;
             }
-
-            [collapsed="true"] {
-                width: inherit;
-                height: var(--medium-card-size, 200px);
-            }
-
             div {
                 padding: var(--content-padding);
                 max-width: calc(var(--content-max-width) - var(--gutter-double));
                 font-size: var(--fluid-fontsize-d);
             }
         </style>
-        <div collapsed="${this.data}">
+        <div>
             ${(this.data)? this.data : (shallFetch) ? "fetching text..." : " Dummy content"}
         </div>
 `;
@@ -33,7 +27,6 @@ class InitialView extends UiPage(LitElement) {
         return {
             unresolved: {
                 type: Boolean,
-                notify: true,
                 value: true,
                 reflectToAttribute: true
             },
@@ -42,6 +35,11 @@ class InitialView extends UiPage(LitElement) {
                 notify: true,
                 value: null
             },
+            ready: {
+                type: Boolean,
+                value: false,
+                reflectToAttribute: true
+            },
             shallFetch: {
                 type: Boolean,
                 reflectToAttribute: true,
@@ -49,20 +47,14 @@ class InitialView extends UiPage(LitElement) {
             }
         };
     }
-
+    
     connectedCallback() {
         super.connectedCallback();
         this.removeAttribute('unresolved');
-        this.setAttribute("loading", true);
-
-        setTimeout(() => {
-            this.removeAttribute('loading');
-            this.setAttribute("ready", true);
-        }, 50);
+        this.setAttribute('ready', true);
     }
 
     transitionInCallback() {
-        
         if (!this.data && this.shallFetch) {
             fetch("https://baconipsum.com/api/?type=meat-and-filler&paras=15&start-with-lorem=1")
                 .then((r) => r.text().then((r) => this.data = r.replace('["', '').replace('"]', '')))

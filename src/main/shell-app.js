@@ -9,9 +9,10 @@ class ShellApp extends HTMLElement {
     });
     shadowRoot.appendChild(tmpl.content.cloneNode(true));
     /* jshint ignore:start */
-    import('../components/dependency-resolver/dependency-resolver.js').then(() => {
+    setTimeout(() => {
+      import('../components/dependency-resolver/dependency-resolver.js');
       import('../main/ui/ui-root.js');
-    });
+    }, 50);
     /* jshint ignore:end */
   }
 }

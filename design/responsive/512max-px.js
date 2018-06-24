@@ -12,7 +12,7 @@ window.dynamicStyleSpace[1] = `
         --medium-card-size: calc(200px + var(--gutter-double));
         --large-card-size: calc(300px + var(--gutter-double) + var(--gutter-double));
         --content-left: 0px;
-        --app-drawer-content-width: calc(var(--app-drawer-width) - var(--gutter-default));
+        --standard-drawer-content-width: calc(var(--standard-drawer-width) - var(--gutter-default));
     }
 }
 @media (min-width: 1px) and (max-width: 512px) {
@@ -22,8 +22,8 @@ window.dynamicStyleSpace[1] = `
 }
 @media (min-width: 1px) and (max-width: 216px) {
     html {
-        --app-drawer-width: var(--viewport-xsmall);
-        --app-drawer-content-width: calc(var(--app-drawer-width) - var(--gutter-default));
+        --standard-drawer-width: var(--viewport-xsmall);
+        --standard-drawer-content-width: calc(var(--standard-drawer-width) - var(--gutter-default));
     }
 }
 `;

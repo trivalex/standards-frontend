@@ -25,10 +25,11 @@
     "src/main/ui/ui-navigation-dependencies.js"
   ],
   "builds": [{
-    "name": "es6-bundled",
+    "name": "esm-bundled",
     "browserCapabilities": [
       "es2015",
-      "serviceworker"
+      "serviceworker",
+      "modules"
     ],
     "js": {
       "compile": true,
@@ -41,6 +42,7 @@
     "html": {
       "minify": true
     },
+      "bundle": true,
     "bundle": true,
     "addServiceWorker": true
   }],

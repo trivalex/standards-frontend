@@ -20,11 +20,13 @@ class AnimeAnimatedPages extends PolymerElement {
     return html `
     <style>
       :host> ::slotted(*) {
-        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
       }
 
       :host> ::slotted([anime-current-page="true"]){
         display: block;
+        margin-top: var(--standard-page-top);
       }
     </style>
     <slot id="pages">
@@ -40,20 +42,25 @@ class AnimeAnimatedPages extends PolymerElement {
         reflectToAttribute: true
       },
       routeInDuration: {
-        value: 250,
+        value: 100,
         reflectToAttribute: true
       },
       routeOutDuration: {
-        value: 225,
+        value: 100,
         reflectToAttribute: true
       },
       routeDebounce: {
-        value: 150,
+        value: 100,
         reflectToAttribute: true
       },
       initialAnimation: {
         type: Boolean,
-        value: true
+        value: false
+      },
+      firstAnimation: {
+        type: Boolean,
+        value: true,
+        reflectToAttribute: true
       },
       activated: {
         type: Boolean,
@@ -98,6 +105,9 @@ class AnimeAnimatedPages extends PolymerElement {
         exitPage = n;
         exitPageIndex = i;
       }
+      if(this.firstAnimation && n !== entryPage) {
+        anime(SLIDE_BOTTOM_FADE(exitPage, 0, 0));
+      }
     });
 
     this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_START, {
@@ -112,12 +122,22 @@ class AnimeAnimatedPages extends PolymerElement {
     }
 
     if (entryPage !== undefined) {
-      entryPage.setAttribute("anime-current-page", true);
       
-      if (this.initialAnimation) {
-        this.set('initialAnimation', false);
-        this._animateEntry(entryPage, GROW_FADE);
-        this._animateExit(exitPage, SLIDE_BOTTOM_FADE);
+      if (this.firstAnimation) {
+        this.set('firstAnimation', false);
+        if(this.initialAnimation) {
+          this._animateEntry(entryPage, GROW_FADE);
+          this._animateExit(exitPage, SLIDE_BOTTOM_FADE);
+        } else {
+          let a = anime(GROW_FADE(entryPage, 100, 0)).finished;
+          a.then(() => {
+            entryPage.transitionInCallback();
+            this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
+              bubbles: true,
+              composed: true
+            }));
+          });
+        }
       } else {
         if (entryPageIndex <= exitPageIndex) {
           this._animateEntry(entryPage, SLIDE_FROM_TOP_FADE);
@@ -135,6 +155,8 @@ class AnimeAnimatedPages extends PolymerElement {
   }
 
   _animateEntry(entryPage, animation) {
+    entryPage.setAttribute("anime-current-page", true);
+    entryPage.style.display = "block";
     let a = anime(animation(entryPage, this.routeOutDuration, this.routeDebounce)).finished;
     a.then(() => {
       entryPage.transitionInCallback();
@@ -148,7 +170,10 @@ class AnimeAnimatedPages extends PolymerElement {
   _animateExit(exitPage, animation) {
     if (exitPage !== undefined) {
       exitPage.transitionOutCallback();
-      anime(animation(exitPage, this.routeOutDuration, this.routeDebounce));
+      let a = anime(animation(exitPage, this.routeOutDuration, this.routeDebounce)).finished;
+      a.then(() => {
+        exitPage.style.display = "none";
+      });
     }
   }
 }

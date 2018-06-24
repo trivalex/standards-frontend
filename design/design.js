@@ -1,3 +1,5 @@
+import '@webcomponents/shadycss/entrypoints/apply-shim.js';
+
 import {
     KeyframesCSS
 } from './keyframes';
@@ -13,6 +15,9 @@ import {
 import {
     GridCSS
 } from './grid';
+import {
+    ZIndexCSS
+} from './z-Index';
 // export const centerHorizontal = (width) => {
 //     return ((Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2) - width / 2);
 // };
@@ -24,6 +29,7 @@ ${ColorsCSS}
 ${LayoutCSS}
 ${GridCSS}
 ${FontsCSS}
+${ZIndexCSS}
 ${KeyframesCSS}
 `;
 window.dynamicStyleSpace[0] = `html { 

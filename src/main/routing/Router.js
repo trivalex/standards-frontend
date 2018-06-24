@@ -7,8 +7,6 @@ import {
 import {
     addRoute, navigate
 } from './routing-actions';
-import { updateDrawerOpened } from '../ui/ui-actions';
-
 export const EVENT_ROUTING = 'EVENT_ROUTING';
 
 export const router = (store) => (baseElement) => class extends connect(store)(baseElement) {
@@ -19,7 +17,6 @@ export const router = (store) => (baseElement) => class extends connect(store)(b
 
     routeCallback(location) {
         store.dispatch(navigate(window.decodeURIComponent(location.pathname)));
-        store.dispatch(updateDrawerOpened(false));
     }
 
     addRouteDataViaElements(elements) {

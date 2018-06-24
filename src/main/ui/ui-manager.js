@@ -51,10 +51,10 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             left: 0;
             width: 100%;
             text-align: center;
-            background-color:  var(--app-primary-glass-color);
-            color: var(--app-header-text-color);
+            background-color:  var(--standard-primary-glass-color);
+            color: var(--standard-header-text-color);
             border-bottom: 1px solid var(--milk-white);
-            min-height: var(--header-height);
+            min-height: var(--standard-header-height);
             z-index: 2000;
             opacity: 1;
             transition-property: opacity;
@@ -63,7 +63,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
         }
         app-toolbar {
-            min-height: var(--header-height);
+            min-height: var(--standard-header-height);
         }
 
         app-drawer {
@@ -71,13 +71,13 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             top: 0px;
             --app-drawer-scrim-background: var(--milk-grey);
             --app-drawer-content-container: {
-                background-color: var(--app-primary-glass-color);
+                background-color: var(--standard-primary-glass-color);
                 height: 100vh;
                 padding: var(--gutter-default) 0px;
-                width: var(--app-drawer-width);
+                width: var(--standard-drawer-width);
                 display: grid;
                 grid-template-rows: var(--framed-icon-size) calc(100vh - (var(--framed-icon-size) + (var(--gutter-default) * 4)) );
-                grid-template-columns: var(--app-drawer-width);
+                grid-template-columns: var(--standard-drawer-width);
                 grid-gap: var(--gutter-default);
                 font-size: var(--fluid-fontsize-b);
                 text-align: center;
@@ -116,9 +116,9 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         }
 
         button {
-            background: var(--app-primary-glass-color);
+            background: var(--standard-primary-glass-color);
             border: none;
-            fill: var(--app-header-text-color);
+            fill: var(--standard-header-text-color);
             cursor: pointer;
             height: var(--framed-icon-size);
             width: var(--framed-icon-size);
@@ -144,6 +144,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             outline: 0;
             background: var(--milk-white);
         }
+
         ::-webkit-scrollbar {
             width: var(--gutter-default);
         }
@@ -151,10 +152,10 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             background: var(--milk-grey);
         }
         ::-webkit-scrollbar-thumb {
-            background: var(--app-primary-glass-color);
+            background: var(--standard-primary-glass-color);
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--app-primary-color);
+            background: var(--standard-primary-color);
         }
     </style>
     <app-header id="header" unresolved="true" condenses reveals effects="waterfall">
@@ -189,14 +190,14 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         <nav class="drawer-list">
         ${ repeat( (routes === undefined || routes === null )? []: routes , 
                         (i) => html`
-        <a href="${i.routePath}"><li>${i.routePath}</li></a>
+            <a href="${i.routePath}"><li>${i.routePath}</li></a>
         `)}
         </nav>
     </app-drawer>
     <slot></slot>
 
     <anime-animated-pages activated activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="routePath"
-        fallback-selection="a" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY}>
+        fallback-selection="${selectedRoute}" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY} routeDebounce=0>
         <slot name="pages" id="pages"></slot>
     </anime-animated-pages>
 `;
@@ -210,7 +211,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
                 this.routingService.addRouteDataViaElements(info.addedNodes);
                 this.routingService.removeRouteDataViaElements(info.removedNodes);
-
             });
         });
         /* jshint ignore:end */
@@ -220,12 +220,14 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         super.connectedCallback();
         /* jshint ignore:start */
         import('../../components/anime-animation/anime-animated-pages/anime-animated-pages.js').then(() => {
-            import('./ui-deferred-dependencies.js').then(() => {
-                this.shadowRoot.getElementById("header").removeAttribute("unresolved");
-                import('./ui-navigation-dependencies.js').then(() => {
+            setTimeout(() => {
+                import('./ui-deferred-dependencies.js').then(() => {
+                    this.shadowRoot.getElementById("header").removeAttribute("unresolved");
                     this.shadowRoot.getElementById("drawer").removeAttribute("unresolved");
+                    import('./ui-navigation-dependencies.js').then(() => {
+                    });
                 });
-            });
+            }, 50);
             this.dispatchEvent(new CustomEvent(EVENT_RAIL_INTERACTIVE, {
                 bubbles: true,
                 composed: true,
