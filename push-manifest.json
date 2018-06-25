@@ -4,11 +4,11 @@
       "type": "script",
       "weight": 1
     },
-    "src/infra/shell-app.js": {
+    "src/main/shell-app.js": {
       "type": "script",
       "weight": 1
     },
-    "src/infra/dependency-resolver/dependency-resolver.js": {
+    "src/components/dependency-resolver/dependency-resolver.js": {
       "type": "script",
       "weight": 1
     },
@@ -16,15 +16,15 @@
       "type": "script",
       "weight": 1
     },
-    "src/infra/ui/ui-root.js": {
+    "src/main/ui/ui-root.js": {
       "type": "script",
       "weight": 1
     },
-    "src/components/tri-loading-indicator.js": {
+    "src/components/awe-decoration/awe-loading-indicator/awe-loading-indicator.js": {
       "type": "script",
       "weight": 1
     },
-    "src/components/initial-view.js": {
+    "src/domain/hello-world/initial-page.js": {
       "type": "script",
       "weight": 1
     }

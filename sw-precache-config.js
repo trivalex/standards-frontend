@@ -16,15 +16,15 @@ module.exports = {
   ],
   runtimeCaching: [
     {
-      urlPattern: /\/@webcomponents\/webcomponentsjs\/*/,
+      urlPattern: /\/@webcomponents\/webcomponentsjs\//,
       handler: 'fastest'
     },
     {
-      urlPattern: /\/design\/design.js\//,
+      urlPattern: /\/design\//,
       handler: 'fastest'
     },
     {
-      urlPattern: /\/design\/design\/*/,
+      urlPattern: /\/design\/responsive\//,
       handler: 'fastest'
     },
     {
@@ -32,7 +32,7 @@ module.exports = {
       handler: 'fastest'
     },
     {
-      urlPattern: /^https:\/\/baconipsum.com\/api\/*/,
+      urlPattern: /^https:\/\/baconipsum.com\/api\//,
       handler: 'fastest'
     },
   ]

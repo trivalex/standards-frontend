@@ -1,4 +1,5 @@
 import '@webcomponents/shadycss/entrypoints/apply-shim.js';
+
 import {
     KeyframesCSS
 } from './keyframes';
@@ -14,17 +15,23 @@ import {
 import {
     GridCSS
 } from './grid';
-export const centerHorizontal = (width) => {
-    return ((Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2) - width / 2);
-};
-export const centerVertical = (height) => {
-    return ((Math.max(document.documentElement.clientHeight, window.innerHeight || 0) / 2) - height / 2);
-};
-export const ThemeCSS = `${ColorsCSS}
+import {
+    ZIndexCSS
+} from './z-Index';
+// export const centerHorizontal = (width) => {
+//     return ((Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2) - width / 2);
+// };
+// export const centerVertical = (height) => {
+//     return ((Math.max(document.documentElement.clientHeight, window.innerHeight || 0) / 2) - height / 2);
+// };
+export const ThemeCSS = `
+${ColorsCSS}
 ${LayoutCSS}
 ${GridCSS}
 ${FontsCSS}
-${KeyframesCSS}`;
+${ZIndexCSS}
+${KeyframesCSS}
+`;
 window.dynamicStyleSpace[0] = `html { 
     ${ThemeCSS}
 }`;
@@ -43,7 +50,7 @@ export const loadViewportStyles = (event) => {
         if (w > 1200 && w <= 1800) lw = "1201min-px";
         if (w > 1800) lw = "1801min-px";
         /* jshint ignore:start */
-        import(`../../design/${lw}.js`).then(() => {});
+        import(`../../design/responsive/${lw}.js`).then(() => {});
         /* jshint ignore:end */
     }, 10);
 };
