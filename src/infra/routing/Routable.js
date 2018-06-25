@@ -1,3 +1,5 @@
+import { dedupingMixin } from '@polymer/polymer/lib/utils/mixin.js';
+
 export const Routable = (baseElement) => {
     return class extends baseElement {
         
@@ -8,7 +10,7 @@ export const Routable = (baseElement) => {
         static get properties() {
             return {
                 routePath: String,
-                componentUri: String,
+                reflectToAttribute: true
             };
         }
     };

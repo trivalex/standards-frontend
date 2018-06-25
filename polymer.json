@@ -6,34 +6,20 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "design/**",
-    "node_modules/@webcomponents/webcomponentsjs/**",
-    "push-manifest.json"
+    "design/**/*",
+    "node_modules/@webcomponents/webcomponentsjs/**/*",
+    "push-manifest.json",
+    "src/components/**/*"
   ],
   "builds": [
     {
       "name": "es6-bundled",
       "browserCapabilities": [
-        "es2015"
+        "es2015",
+        "serviceworker"
       ],
       "js": {
-        "compile": "es2015",
-        "minify": true,
-        "transformModulesToAmd": true
-      },
-      "css": {
-        "minify": true
-      },
-      "html": {
-        "minify": true
-      },
-      "bundle": true,
-      "addServiceWorker": true
-    },
-    {
-      "name": "es5-bundled",
-      "js": {
-        "compile": "es5",
+        "compile": true,
         "minify": true,
         "transformModulesToAmd": true
       },

@@ -20,6 +20,10 @@
       "type": "script",
       "weight": 1
     },
+    "src/components/tri-loading-indicator.js": {
+      "type": "script",
+      "weight": 1
+    },
     "src/components/initial-view.js": {
       "type": "script",
       "weight": 1

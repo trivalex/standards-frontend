@@ -1,10 +1,10 @@
-export const APP_TITLE = "Shell App";
+export const APP_TITLE = "Standards App";
 
 class ShellApp extends HTMLElement {
   constructor() {
     super();
     let tmpl = document.createElement('template');
-    tmpl.innerHTML = `<dependency-resolver><network-service></network-service><routing-service></routing-service><ui-root></ui-root></dependency-resolver>`;
+    tmpl.innerHTML = `<dependency-resolver><mediasource-service></mediasource-service><network-service></network-service><routing-service></routing-service><ui-root></ui-root></dependency-resolver>`;
     let shadowRoot = this.attachShadow({      mode: 'open'    });
     shadowRoot.appendChild(tmpl.content.cloneNode(true));
     /* jshint ignore:start */

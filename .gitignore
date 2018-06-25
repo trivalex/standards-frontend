@@ -4,3 +4,6 @@ test/integration/screenshots-current
 yarn.lock
 .DS_Store
 firebase-debug.log
+firebase-debug.log
+.database.rules.json
+.functions

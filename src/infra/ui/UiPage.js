@@ -1,4 +1,8 @@
 import {
   UiRoutable
 } from "./UiRoutable";
-export const UiPage = (baseElement) => class extends UiRoutable(baseElement) {};
+import {
+  AnimatablePage
+} from "../../components/AnimatablePage";
+
+export const UiPage = (baseElement) => class extends UiRoutable(AnimatablePage(baseElement)) {};

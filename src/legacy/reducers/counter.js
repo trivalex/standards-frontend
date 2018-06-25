@@ -8,16 +8,23 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
-let snackbarTimer;
+import { INCREMENT, DECREMENT } from '../actions/counter.js';
 
-export const updateOffline = (offline) => (dispatch, getState) => {
-  // Show the snackbar, unless this is the first load of the page.
-  if (getState().app.offline !== undefined) {
-    // dispatch(showSnackbar());
+const counter = (state = {clicks: 0, value: 0}, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return {
+        'clicks': state.clicks + 1,
+        'value': state.value + 1
+      };
+    case DECREMENT:
+      return {
+        'clicks': state.clicks + 1,
+        'value': state.value - 1
+      };
+    default:
+      return state;
   }
-  dispatch({
-    type: UPDATE_OFFLINE,
-    offline
-  });
-};
+}
+
+export default counter;

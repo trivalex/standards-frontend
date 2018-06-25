@@ -32,7 +32,6 @@ class MediasourceService extends PolymerElement {
         console.log(r);
     }
     connectedCallback() {
-        this.initOnAttach = true;
         this.fetchLinks();
     }
     _computeHasLinks(value) {

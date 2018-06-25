@@ -6,10 +6,6 @@ export const ui = (state = {
     /* jshint ignore:start */
     switch (action.type) {
         case UPDATE_DRAWER_OPENED:
-        console.log(action);
-            if (action.open === undefined) {
-                console.error();
-            }
             return { ...state,
                 drawerOpened: action.open
             };

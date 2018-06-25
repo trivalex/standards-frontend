@@ -21,15 +21,15 @@
   },
   "dependencies": {
     "@polymer/app-layout": "^3.0.0-pre.19",
-    "@polymer/lit-element": "^0.5.0",
+    "@polymer/lit-element": "^0.5.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "animejs": "^2.2.0",
     "pwa-helpers": "^0.8.2",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
     "requirejs": "^2.3.5",
-    "reselect": "^3.0.1",
-    "traverson": "^6.0.3"
+    "traverson": "^6.0.3",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "axe-core": "^3.0.0",
