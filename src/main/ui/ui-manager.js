@@ -42,6 +42,15 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         [unresolved="true"] {
             opacity: 0;
         }
+        app-header-layout {
+            position: absolute;
+            height: calc(100% - 200px);
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            height: 100vh;
+            width: 100vw;
+            z-index: 1000;
+        }
         app-header[unresolved] {
             opacity: 0;
         }
@@ -144,6 +153,15 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             outline: 0;
             background: var(--milk-white);
         }
+        
+        .bacon {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        
+        .grid {
+            grid-column: span 1;
+        }
 
         ::-webkit-scrollbar {
             width: var(--gutter-default);
@@ -158,16 +176,27 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             background: var(--standard-primary-color);
         }
     </style>
-    <app-header id="header" unresolved="true" condenses reveals effects="waterfall">
-        <app-toolbar>
-            <button
-                on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
-                title="drawer menu">
-            ${iconMenu}
-            </button>
-            <h4 condensed-title>${APP_TITLE}</h4>
-        </app-toolbar>
-    </app-header>
+    
+    <app-header-layout has-scrolling-region>
+        <app-header slot="header" id="header" unresolved="true" condenses shadow reveals effects="waterfall">
+            <app-toolbar>
+                <button
+                    on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
+                    title="drawer menu">
+                ${iconMenu}
+                </button>
+                <h4 condensed-title>${APP_TITLE}</h4>
+            </app-toolbar>
+        </app-header>
+        <slot></slot>
+
+        <anime-animated-pages activated activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="id"
+            attrForSelected="a" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY} routeDebounce=0>
+            <slot name="pages" id="pages"></slot>
+        </anime-animated-pages>
+
+    </app-header-layout>
+
     <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}">
         <nav class="drawer-menu">
             <div>
@@ -189,17 +218,11 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         </nav>
         <nav class="drawer-list">
         ${ repeat( (routes === undefined || routes === null )? []: routes , 
-                        (i) => html`
-            <a href="${i.routePath}"><li>${i.routePath}</li></a>
+                        (route) => html`
+            <a class$="${route.element.id}" href$="${route.element.id}"><li>${route.element.id}</li></a>
         `)}
         </nav>
     </app-drawer>
-    <slot></slot>
-
-    <anime-animated-pages activated activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="routePath"
-        fallback-selection="${selectedRoute}" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY} routeDebounce=0>
-        <slot name="pages" id="pages"></slot>
-    </anime-animated-pages>
 `;
     }
 
@@ -220,14 +243,12 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         super.connectedCallback();
         /* jshint ignore:start */
         import('../../components/anime-animation/anime-animated-pages/anime-animated-pages.js').then(() => {
-            setTimeout(() => {
-                import('./ui-deferred-dependencies.js').then(() => {
-                    this.shadowRoot.getElementById("header").removeAttribute("unresolved");
-                    this.shadowRoot.getElementById("drawer").removeAttribute("unresolved");
-                    import('./ui-navigation-dependencies.js').then(() => {
-                    });
+            import('./ui-deferred-dependencies.js').then(() => {
+                this.shadowRoot.getElementById("header").removeAttribute("unresolved");
+                this.shadowRoot.getElementById("drawer").removeAttribute("unresolved");
+                import('./ui-navigation-dependencies.js').then(() => {
                 });
-            }, 50);
+            });
             this.dispatchEvent(new CustomEvent(EVENT_RAIL_INTERACTIVE, {
                 bubbles: true,
                 composed: true,
@@ -265,7 +286,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
                 type: Boolean,
                 reflectToAttribute: true,
             },
-            ready: Boolean,
             routes: {
                 type: Array,
             },

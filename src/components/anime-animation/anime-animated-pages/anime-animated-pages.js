@@ -21,7 +21,7 @@ class AnimeAnimatedPages extends PolymerElement {
     <style>
       :host> ::slotted(*) {
         opacity: 0;
-        transition: opacity 0.5s ease-out;
+        transition: opacity 0.3s ease-out;
       }
 
       :host> ::slotted([anime-current-page="true"]){
@@ -71,16 +71,16 @@ class AnimeAnimatedPages extends PolymerElement {
         type: String,
         reflectToAttribute: true,
         observer: '_selectedPageChanged'
+      },
+      fallbackSelection: {
+        type: String,
+        reflectToAttribute: true,
       }
     };
   }
 
   _selectedPageChanged(selected) {
-    if (this.shadowRoot === undefined || this.shadowRoot === null) {
-      return;
-    }
-
-    if (!this.activated) {
+    if (this.shadowRoot === undefined || this.shadowRoot === null || !this.activated || selected === undefined || selected === "" || selected === " ") {
       return;
     }
 
@@ -105,7 +105,7 @@ class AnimeAnimatedPages extends PolymerElement {
         exitPage = n;
         exitPageIndex = i;
       }
-      if(this.firstAnimation && n !== entryPage) {
+      if (this.firstAnimation && n !== entryPage) {
         anime(SLIDE_BOTTOM_FADE(exitPage, 0, 0));
       }
     });
@@ -121,35 +121,28 @@ class AnimeAnimatedPages extends PolymerElement {
       }, this.routeInDuration);
     }
 
+    let entryAnim = GROW_FADE,
+      exitAnim = SLIDE_BOTTOM_FADE;
+
     if (entryPage !== undefined) {
-      
+
       if (this.firstAnimation) {
         this.set('firstAnimation', false);
-        if(this.initialAnimation) {
-          this._animateEntry(entryPage, GROW_FADE);
-          this._animateExit(exitPage, SLIDE_BOTTOM_FADE);
-        } else {
-          let a = anime(GROW_FADE(entryPage, 100, 0)).finished;
-          a.then(() => {
-            entryPage.transitionInCallback();
-            this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
-              bubbles: true,
-              composed: true
-            }));
-          });
-        }
       } else {
         if (entryPageIndex <= exitPageIndex) {
-          this._animateEntry(entryPage, SLIDE_FROM_TOP_FADE);
-          this._animateExit(exitPage, SLIDE_BOTTOM_FADE);
+          entryAnim = SLIDE_FROM_TOP_FADE;
+          exitAnim = SLIDE_BOTTOM_FADE;
         }
 
         if (entryPageIndex > exitPageIndex) {
-          this._animateEntry(entryPage, SLIDE_FROM_BOTTOM_FADE);
-          this._animateExit(exitPage, SLIDE_TOP_FADE);
+          entryAnim = SLIDE_FROM_BOTTOM_FADE;
+          exitAnim = SLIDE_TOP_FADE;
         }
       }
     }
+
+    this._animateEntry(entryPage, entryAnim);
+    this._animateExit(exitPage, exitAnim);
 
     this.currentPage = selected;
   }

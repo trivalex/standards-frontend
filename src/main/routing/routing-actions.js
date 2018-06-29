@@ -4,7 +4,7 @@ export const ADD_ROUTE = 'ADD_ROUTE';
 
 export const navigate = (path) => (dispatch) => {
     // Extract the page name from path.
-    const page = path === '/' ? 'a' : path.slice(1);
+    const page = path === '/' ? 'bacon' : path.slice(1);
 
     // Any other info you might want to extract from the path (like page type),
     // you can do here
@@ -13,8 +13,9 @@ export const navigate = (path) => (dispatch) => {
 
 /* jshint ignore:start */
 export const loadPage = (page) => async (dispatch) => {
-
-    dispatch(updatePage(page));
+    import(`../../pages/${page}-page.js`).then(() => {
+        dispatch(updatePage(page));
+    });
 }
 
 export const addRoutes = (routes) => {

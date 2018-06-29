@@ -18,12 +18,6 @@ import {
 import {
     ZIndexCSS
 } from './z-Index';
-// export const centerHorizontal = (width) => {
-//     return ((Math.max(document.documentElement.clientWidth, window.innerWidth || 0) / 2) - width / 2);
-// };
-// export const centerVertical = (height) => {
-//     return ((Math.max(document.documentElement.clientHeight, window.innerHeight || 0) / 2) - height / 2);
-// };
 export const ThemeCSS = `
 ${ColorsCSS}
 ${LayoutCSS}

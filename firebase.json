@@ -9,7 +9,7 @@
       "source": "/",
       "headers": [{
         "key": "Link",
-        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;nopush;as=script,</design/responsive/512max-px.js>;rel=preload;nopush;as=script,</design/design.js>;rel=preload;nopush;as=script,</src/main/ui/ui-root.js>;rel=preload;nopush;as=script,</src/components/awe-decoration/awe-loading-indicator/awe-loading-indicator.js>;rel=preload;nopush;as=script,</src/domain/hello-world/initial-page.js>;rel=preload;nopush;as=script,</src/components/dependency-resolver/dependency-resolver.js>;rel=preload;nopush;as=script"
+        "value": "</node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;nopush;as=script,</design/responsive/512max-px.js>;rel=preload;nopush;as=script,</design/design.js>;rel=preload;nopush;as=script,</src/main/ui/ui-root.js>;rel=preload;nopush;as=script,</src/components/dependency-resolver/dependency-resolver.js>;rel=preload;nopush;as=script"
       }]
     }]
   }
