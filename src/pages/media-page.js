@@ -100,9 +100,13 @@ class InitialView extends connect(store)(Dependant(UiPage(LitElement))) {
             }
         </style>
         <div class="content">
-            ${(data)? this.renderFolders(data): "looking for local mediaresource service on port 8080..."}
+            ${(data)? this.renderFolders(data): this.renderFetchMessage()}
         </div>
 `;
+    }
+
+    renderFetchMessage()  {
+        return html`<a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">looking for local mediaresource service on port 8080...</a>`
     }
 
     renderFolders(datas) {
