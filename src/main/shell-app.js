@@ -9,10 +9,13 @@ class ShellApp extends HTMLElement {
     });
     shadowRoot.appendChild(tmpl.content.cloneNode(true));
     /* jshint ignore:start */
-    setTimeout(() => {
-      import('../components/dependency-resolver/dependency-resolver.js');
-      import('../main/ui/ui-root.js');
-    }, 50);
+    import('../components/dependency-resolver/dependency-resolver.js');
+    import('../main/ui/ui-root.js');
+    import('../../design/design.js');
+
+    let fp = `../pages/${window.location.pathname.replace('/', '')}-page.js`;
+    import(fp);
+    this.removeAttribute('unresolved');
     /* jshint ignore:end */
   }
 }

@@ -130,6 +130,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // document.getElementById("loadingIndicator").removeAttribute("animate");
       // document.getElementById("loadingIndicator").setAttribute("interactive", true);
     });
+
+    // let fp = `./src/pages/${window.location.pathname.replace('/', '')}-page.js`,
+    //   fps = document.createElement('script');
+
+    // fps.async = true;
+    // fps.defer = true;
+    // fps.type = "module";
+    // fps.src = fp;
+    // fps.crossorigin = fp;
+    // document.head.append(fps);
+    /* jshint ignore:end */
   </script>
   <style>
     @font-face {
@@ -169,7 +180,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     ::-webkit-scrollbar-thumb:hover {
       background: var(--standard-primary-color);
     }
-        /* awe-loading-indicator {
+
+    /* awe-loading-indicator {
             position: fixed;
             --awe-li-size: var(--small-card-size);
             --awe-li-bg-color: var(--standard-primary-glass-color);
@@ -189,24 +201,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         awe-loading-indicator[unresolved] {
             opacity: 0;
         } */
+
     #loadingText {
-        color: white;
-        position: fixed;
-        margin: calc(50vw - (50vw /2));
-        width: 50vw;
-        font-size: 32px;
-        text-align: center;
-        bottom: 32px;
+      color: white;
+      position: fixed;
+      margin: calc(50vw - (50vw /2));
+      width: 50vw;
+      font-size: 48px;
+      text-align: center;
+      bottom: 40%;
+    }
+
+    shell-app[unresolved] {
+      opacity: 1;
+      width: 100vw;
+      height: 100vw;
+      background: white;
+    }
+    shell-app {
+      max-height: 50vw;
+      max-width: 50vw;
+      transition: all 0.3s ease-out;
+      background: transparent;
     }
   </style>
 </head>
 
 <body>
   <span id="loadingText">Shell App</span>
-  <shell-app></shell-app>
+  <shell-app unresolved></shell-app>
   <noscript>Please enable JavaScript to view this website.</noscript>
-  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script async defer type="module" src="src/main/shell-app.js" crossorigin>Loading</script>
+  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <!-- <script defer type="module" src="design/design.js" crossorigin></script> -->
+  <script type="module" src="src/main/shell-app.js" crossorigin></script>
 </body>
 
 </html>

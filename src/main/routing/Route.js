@@ -1,5 +1,7 @@
 export class Route {
-    constructor(routePath) {
+    constructor(routePath, tagName, element) {
         this.routePath = routePath;
+        this.tagName = tagName;
+        this.element = element;
     }
 }

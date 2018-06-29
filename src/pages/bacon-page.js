@@ -2,13 +2,18 @@ import {
     LitElement,
     html
 } from '@polymer/lit-element';
-import { UiPage } from '../../main/ui/UiPage';
+import {
+    UiPage
+} from '../main/ui/UiPage';
 
 class InitialView extends UiPage(LitElement) {
-    _render({ready, shallFetch}) {
+    _render({
+        ready,
+        shallFetch
+    }) {
         return html `
         <style>
-            :host([unresolved]) *{
+            :host([unresolved]) * {
                 display: none;
             }
             div {
@@ -25,20 +30,10 @@ class InitialView extends UiPage(LitElement) {
 
     static get properties() {
         return {
-            unresolved: {
-                type: Boolean,
-                value: true,
-                reflectToAttribute: true
-            },
             data: {
                 type: Object,
                 notify: true,
                 value: null
-            },
-            ready: {
-                type: Boolean,
-                value: false,
-                reflectToAttribute: true
             },
             shallFetch: {
                 type: Boolean,
@@ -47,12 +42,6 @@ class InitialView extends UiPage(LitElement) {
             }
         };
     }
-    
-    connectedCallback() {
-        super.connectedCallback();
-        this.removeAttribute('unresolved');
-        this.setAttribute('ready', true);
-    }
 
     transitionInCallback() {
         if (!this.data && this.shallFetch) {
@@ -60,11 +49,11 @@ class InitialView extends UiPage(LitElement) {
                 .then((r) => r.text().then((r) => this.data = r.replace('["', '').replace('"]', '')))
                 .catch((e) => e);
         }
-        // console.log(`hello-world ${this.routePath} presented`);
+        // console.log(`hello-world ${this.id} presented`);
     }
 
     transitionOutCallback() {
-        // console.log(`hello-world ${this.routePath} obscured`);
+        // console.log(`hello-world ${this.id} obscured`);
     }
 }
-customElements.define("initial-page", InitialView);
+customElements.define("bacon-page", InitialView);

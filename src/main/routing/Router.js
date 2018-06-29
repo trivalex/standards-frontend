@@ -5,7 +5,8 @@ import {
     Route
 } from './Route';
 import {
-    addRoute, navigate
+    addRoute,
+    navigate
 } from './routing-actions';
 export const EVENT_ROUTING = 'EVENT_ROUTING';
 
@@ -21,12 +22,17 @@ export const router = (store) => (baseElement) => class extends connect(store)(b
 
     addRouteDataViaElements(elements) {
         if (!Array.isArray(elements)) return;
-        elements.forEach((element) => this.addRouteDataViaElement(element));
+
+        elements.forEach((element) => {
+            this.addRouteDataViaElement(element);
+        });
     }
 
     addRouteDataViaElement(element) {
-        if (!this.isRoutable(element)) return;
-        store.dispatch(addRoute(new Route(element.routePath)));
+        if (this._routeReg === undefined) this._routeReg = {};
+        this._routeReg[element.id] = element.tagName.toLowerCase();
+
+        store.dispatch(addRoute(new Route(element.id, element.tagName.toLowerCase(), element)));
     }
 
     removeRouteDataViaElements(elements) {
