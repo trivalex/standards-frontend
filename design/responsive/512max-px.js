@@ -4,6 +4,7 @@ window.dynamicStyleSpace[1] = `
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --content-max-width: var(--viewport-xsmall);
         --content-margin: 0px;
+        --gallery-collumns: 1fr 1fr 1fr;
         --notification-min-width: 100%;
         --notification-width: 100%;
         --notification-max-width: 100%;

@@ -100,7 +100,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           title: "Refresh now!",
                           action: "update-app",
                         }],
-                        body: "shell-app has got an update.",
+                        body: "standards-frontend has got an update.",
                         vibrate: [200, 100, 100, 200, 100, 200, 100, 200],
                         tag: 'update-app'
                       }).then(() => {});
@@ -181,27 +181,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       background: var(--standard-primary-color);
     }
 
-    /* awe-loading-indicator {
-            position: fixed;
-            --awe-li-size: var(--small-card-size);
-            --awe-li-bg-color: var(--standard-primary-glass-color);
-            --awe-li-color-a:var(--standard-primary-glass-color);
-            --awe-li-color-b:var(--standard-primary-glass-color);
-            left: calc(50vw - var(--small-card-size) / 2);
-            top: calc(50vh  - var(--small-card-size) / 2);
-            transition: all 1s cubic-bezier(1.000, 0.005, 0.000, 1.000);
-            z-index: 10000;
-        }
-
-        awe-loading-indicator[interactive] {
-            opacity: 0.1;
-            z-index: 300;
-        }
-        
-        awe-loading-indicator[unresolved] {
-            opacity: 0;
-        } */
-
     #loadingText {
       color: white;
       position: fixed;
@@ -218,6 +197,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       height: 100vw;
       background: white;
     }
+
     shell-app {
       max-height: 50vw;
       max-width: 50vw;
@@ -228,11 +208,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 
 <body>
-  <span id="loadingText">Shell App</span>
+  <span id="loadingText">microservice-gallery</span>
   <shell-app unresolved></shell-app>
   <noscript>Please enable JavaScript to view this website.</noscript>
   <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <!-- <script defer type="module" src="design/design.js" crossorigin></script> -->
   <script type="module" src="src/main/shell-app.js" crossorigin></script>
 </body>
 

@@ -119,13 +119,15 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             padding: var(--gutter-default);
         }
         .drawer-list > a {
+            color: var(--black);
         }
         .drawer-list > a:hover {
-            background: var(--suggest-glass-color);
+            background: var(--standard-primary-color);
+            color: var(--white);
         }
 
         button {
-            background: var(--standard-primary-glass-color);
+            background: var(--milk-white);
             border: none;
             fill: var(--standard-header-text-color);
             cursor: pointer;
@@ -133,7 +135,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             width: var(--framed-icon-size);
         }
         button:hover {
-            fill: var(--suggest-color);
+            fill: var(--standard-primary-color);
         }
 
         /*
@@ -148,13 +150,18 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         li {
             list-style-type: none;
         }
+
         a {
+            color: var(--white);
             text-decoration: none;
             outline: 0;
+        }
+
+        .drawer-list a {
             background: var(--milk-white);
         }
         
-        .bacon {
+        .media {
             grid-column: span 2;
             grid-row: span 2;
         }
@@ -185,7 +192,10 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
                     title="drawer menu">
                 ${iconMenu}
                 </button>
-                <h4 condensed-title>${APP_TITLE}</h4>
+                        <a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">
+                    <h4 >${APP_TITLE}
+                    </h4>
+                        </a>
             </app-toolbar>
         </app-header>
         <slot></slot>

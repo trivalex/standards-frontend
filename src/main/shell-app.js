@@ -1,9 +1,9 @@
-export const APP_TITLE = "Shell App";
+export const APP_TITLE = "microservice-gallery";
 class ShellApp extends HTMLElement {
   constructor() {
     super();
     let tmpl = document.createElement('template');
-    tmpl.innerHTML = `<dependency-resolver><routing-service></routing-service><ui-root></ui-root></dependency-resolver>`;
+    tmpl.innerHTML = `<dependency-resolver><mediaresource-service></mediaresource-service></mediaresource-service><routing-service></routing-service><ui-root></ui-root></dependency-resolver>`;
     let shadowRoot = this.attachShadow({
       mode: 'open'
     });

@@ -4,7 +4,7 @@ export const ADD_ROUTE = 'ADD_ROUTE';
 
 export const navigate = (path) => (dispatch) => {
     // Extract the page name from path.
-    const page = path === '/' ? 'bacon' : path.slice(1);
+    const page = path === '/' ? 'media' : path.slice(1);
 
     // Any other info you might want to extract from the path (like page type),
     // you can do here

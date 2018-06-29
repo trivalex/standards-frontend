@@ -31,9 +31,5 @@ module.exports = {
       urlPattern: /^https:\/\/fonts.gstatic.com\//,
       handler: 'fastest'
     },
-    {
-      urlPattern: /^https:\/\/baconipsum.com\/api\//,
-      handler: 'fastest'
-    },
   ]
 };

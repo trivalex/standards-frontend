@@ -17,7 +17,7 @@
     "push-manifest.json"
   ],
   "fragments": [
-    "src/pages/bacon-page.js",
+    "src/pages/media-page.js",
     "src/pages/grid-page.js"
   ],
   "builds": [{
