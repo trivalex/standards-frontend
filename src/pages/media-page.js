@@ -65,7 +65,7 @@ class InitialView extends connect(store)(Dependant(UiPage(LitElement))) {
                 display: grid;
                 grid-template-columns : var(--gallery-collumns);
                 grid-auto-rows : calc(var(--icon-size) * 3);
-                grid-gap: var(--gutter-half);
+                grid-gap: var(--gutter-default);
             }
             .sf  {
                 box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -73,7 +73,7 @@ class InitialView extends connect(store)(Dependant(UiPage(LitElement))) {
             }
             .sf>.name {
                 position: absolute;
-                margin: auto var(--gutter-half);
+                margin: auto var(--gutter-default);
                 font-size: var(--fluid-fontsize-d);
             }
             .sf:hover {

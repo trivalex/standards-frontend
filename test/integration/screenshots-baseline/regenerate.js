@@ -58,15 +58,10 @@ async function generateBaselineScreenshots(page) {
     console.log(prefix + '...');
     page.setViewport(breakpoints[i]);
     // Index.
-    await page.goto('http://127.0.0.1:4444/');
-    await page.screenshot({path: `${baselineDir}/${prefix}/index.png`});
     // Views.
-    for (let i = 1; i <= 3; i++) {
-      await page.goto(`http://127.0.0.1:4444/view${i}`);
-      await page.screenshot({path: `${baselineDir}/${prefix}/view${i}.png`});
-    }
-    // 404.
-    await page.goto('http://127.0.0.1:4444/batmanNotAView');
-    await page.screenshot({path: `${baselineDir}/${prefix}/batmanNotAView.png`});
+    await page.goto(`http://127.0.0.1:4444/media`);
+    await page.screenshot({path: `${baselineDir}/${prefix}/media.png`});
+    await page.goto(`http://127.0.0.1:4444/grid`);
+    await page.screenshot({path: `${baselineDir}/${prefix}/grid.png`});
   }
 }
