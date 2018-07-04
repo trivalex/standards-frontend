@@ -7,3 +7,4 @@ firebase-debug.log
 firebase-debug.log
 .database.rules.json
 .functions
+package-lock.json
