@@ -2,6 +2,7 @@ import {
     LitElement,
     html
 } from '@polymer/lit-element';
+import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import {
     Dependant
 } from '../../components/dependency-resolver/Dependant';
@@ -138,12 +139,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             fill: var(--standard-primary-color);
         }
 
-        /*
-        app-drawer:not([opened]) .drawer-list *{
-            display: none;
-        }
-        */
-
         .special {
             grid-column: 5;
         }
@@ -169,19 +164,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         .grid {
             grid-column: span 1;
         }
-
-        ::-webkit-scrollbar {
-            width: var(--gutter-default);
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--milk-grey);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--standard-primary-glass-color);
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--standard-primary-color);
-        }
     </style>
     
     <app-header-layout has-scrolling-region>
@@ -192,12 +174,12 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
                     title="drawer menu">
                 ${iconMenu}
                 </button>
-                        <a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">
-                    <h4 >${APP_TITLE}
-                    </h4>
-                        </a>
+                <a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">
+                    <h4>${APP_TITLE}</h4>
+                </a>
             </app-toolbar>
         </app-header>
+
         <slot></slot>
 
         <anime-animated-pages activated activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="id"
@@ -209,13 +191,11 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
     <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}">
         <nav class="drawer-menu">
-            <div>
-                <button
-                    on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
-                    title="drawer menu">
+            <button
+                on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
+                title="drawer menu">
                 ${iconMenu}
-                </button>
-            </div>
+            </button>
             <button>
                 ${iconAccount}
             </button>

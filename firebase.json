@@ -1,6 +1,11 @@
 {
   "hosting": {
     "public": "build/esm-bundled",
+    "redirects": [{
+      "source": "/",
+      "destination": "/media",
+      "type": 301
+    }],
     "rewrites": [{
       "source": "**",
       "destination": "/index.html"

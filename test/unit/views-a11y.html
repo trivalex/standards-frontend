@@ -24,19 +24,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <script src="../../node_modules/wct-browser-legacy/browser.js"></script>
-
     <!-- Import the element to test -->
-    <!-- <script type="module" src="../../src/components/my-view1.js"></script>
-    <script type="module" src="../../src/components/my-view2.js"></script>
-    <script type="module" src="../../src/components/my-view3.js"></script>
-    <script type="module" src="../../src/components/my-view404.js"></script> -->
-  </head>
-  <body>
-    <test-fixture id="view1">
+    <script type="module" src="../../src/pages/media-page.js"></script>
+
+    <test-fixture id="media">
       <template>
-        <my-view1 active></my-view1>
+        <media-page></media-page>
       </template>
     </test-fixture>
+
+    <script type="module">
+      import 'axe-core/axe.min.js';
+      import {axeReport} from 'pwa-helpers/axe-report.js';
+
+      suite('views a11y tests', function() {
+        test('media-page', function() {
+          const el = fixture('media');
+          return axeReport(el);
+        });
+      });
+    </script>
+  </body>
+</html>
+
+    <!-- <script type="module" src="../../src/components/my-view1.js"></script>
+  </head>
+  <body>
     <test-fixture id="view2">
       <template>
         <my-view2 active></my-view2>
@@ -52,32 +65,3 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <my-view404 active></my-view404>
       </template>
     </test-fixture>
-
-    <script type="module">
-      import 'axe-core/axe.min.js';
-      import {axeReport} from 'pwa-helpers/axe-report.js';
-
-      suite('views a11y tests', function() {
-        // test('my-view1', function() {
-        //   const el = fixture('view1');
-        //   return axeReport(el);
-        // });
-
-        // test('my-view2', function() {
-        //   const el = fixture('view2');
-        //   return axeReport(el);
-        // });
-
-        // test('my-view3', function() {
-        //   const el = fixture('view3');
-        //   return axeReport(el);
-        // });
-
-        // test('my-view404', function() {
-        //   const el = fixture('view404');
-        //   return axeReport(el);
-        // });
-      });
-    </script>
-  </body>
-</html>
