@@ -1,4 +1,4 @@
-import '../../../../node_modules/animejs/anime';
+import '../animejs/anime';
 import './AnimatablePage.js';
 import {
   SLIDE_FROM_BOTTOM_FADE,
