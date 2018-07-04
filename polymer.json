@@ -11,6 +11,7 @@
     "src/main/ui/ui-root.js",
     "node_modules/@webcomponents/webcomponentsjs/**/*",
     "node_modules/@webcomponents/shadycss/**/*",
+    "node_modules/@webcomponents/animejs/**/*",
     "src/components/**/*",
     "src/main/routing/**/*",
     "src/main/ui/**/*",
@@ -38,7 +39,6 @@
     "html": {
       "minify": true
     },
-      "bundle": true,
     "bundle": true,
     "addServiceWorker": true
   }],

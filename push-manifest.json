@@ -19,10 +19,6 @@
     "src/main/ui/ui-root.js": {
       "type": "script",
       "weight": 1
-    },
-    "src/domain/hello-world/initial-page.js": {
-      "type": "script",
-      "weight": 1
     }
   }
 }
