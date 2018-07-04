@@ -36,7 +36,7 @@ class MediaresourceService extends HTMLElement {
                                 controller.enqueue(value);
                                 push();
                             });
-                        };
+                        }
     
                         push();
                     }
@@ -49,12 +49,11 @@ class MediaresourceService extends HTMLElement {
                 });
     
                 response.json().then((json) => {
-                    resolve(json)
+                    resolve(json);
                 });
             }).catch((e) => {
                 this.lastError = e;
-                console.error(e);
-                reject(e)
+                reject(e);
             });
         });
     }
@@ -89,7 +88,7 @@ class MediaresourceService extends HTMLElement {
                                 controller.enqueue(value);
                                 push();
                             });
-                        };
+                        }
     
                         push();
                     }
@@ -102,12 +101,12 @@ class MediaresourceService extends HTMLElement {
                 });
     
                 response.json().then((json) => {
-                    resolve(json)
+                    resolve(json);
                 });
             }).catch((e) => {
                 this.lastError = e;
                 console.error(e);
-                reject(e)
+                reject(e);
             });
         });
     }

@@ -7,15 +7,15 @@ export const addResource = (resource) => {
         type: ADD_RESOURCE,
         resource
     };
-}
+};
 export const deleteResource = (resource) => {
     return {
         type: DELETE_RESOURCE,
         resource
     };
-}
+};
 export const fetchResource = async (resource) => {
     return {
         type: FETCH_RESOURCE
     };
-}
+};

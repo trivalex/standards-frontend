@@ -8,7 +8,6 @@ import {
  * dependency-resolver provides 'document dependency resolution',
  * a dependency injection approach for components within it's light-DOM.
  */
-
 class DependencyResolver extends HTMLElement {
 
     constructor() {
@@ -36,19 +35,6 @@ class DependencyResolver extends HTMLElement {
                     );
                 }
             });
-
-            // unregistration
-            // info.removedNodes.filter((node) => {
-            //     return (node.nodeType === Node.ELEMENT_NODE);
-            // }).forEach(element => {
-            //     if (element.tagName !== undefined) {
-            //         this.removeEventListener(
-            //             `${DEPEDENCY_WIRING_PREFIX}-${element.tagName.toLowerCase()}`, (event) => {
-            //                 event.stopPropagation();
-            //             }
-            //         );
-            //     }
-            // });
         });
     }
 }
