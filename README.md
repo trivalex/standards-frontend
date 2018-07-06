@@ -6,19 +6,42 @@
 >
 > See the list of Known Issues and TODOs, below, for updates.
 
+# What it is
+
+A work in progress PWA, architectured after [#useThePlatform](https://twitter.com/hashtag/usetheplatform?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Ehashtag) or like [Youtube](https://www.youtube.com/)
+
+# What it not is
+
+Completed
+
+# Architecture
+
+* [App Shell Architecture](https://developers.google.com/web/fundamentals/architecture/app-shell)
+* [RAIL Performance](https://developers.google.com/web/fundamentals/performance/rail)
+
 # installation
 
 * bash in project root
     
-    1. ```npm install```
+    * ```npm install```
 
 * Current CORS Workaround:
 
     * install a CORS extension in your browser like this one: https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
 
 # Build
+* bash in project root
 
-* ```polymer build```
+    * ```polymer build```
+
+# Dev Hosting/Preview
+
+* bash in project root
+    * ```polymer serve```
+
+# Local Production preview
+
+* Contact me :)
 
 # PWA Starter Kit (Customized)
 
