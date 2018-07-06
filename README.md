@@ -6,7 +6,21 @@
 >
 > See the list of Known Issues and TODOs, below, for updates.
 
-# PWA Starter Kit
+# installation
+
+* bash in project root
+    
+    1. ```npm install```
+
+* Current CORS Workaround:
+
+    * install a CORS extension in your browser like this one: https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi
+
+# Build
+
+* ```polymer build```
+
+# PWA Starter Kit (Customized)
 
 This sample app is a starting point for building PWAs. Out of the box, the template
 gives you the following features:

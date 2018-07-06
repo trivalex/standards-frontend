@@ -106,7 +106,8 @@ class InitialView extends connect(store)(Dependant(UiPage(LitElement))) {
     }
 
     renderFetchMessage()  {
-        return html`<a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">looking for local mediaresource service on port 8080...</a>`
+        return html`<a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">looking for local mediaresource service on port 8080...</a>
+        currently, you also need a cors extension like the <a target="_blank" href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">Chrome CORS Extension</a>`
     }
 
     renderFolders(datas) {
