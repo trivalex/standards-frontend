@@ -1,4 +1,4 @@
-export const APP_TITLE = "microservice-gallery";
+export const APP_TITLE = "TVD-Web Standards";
 class ShellApp extends HTMLElement {
   constructor() {
     super();

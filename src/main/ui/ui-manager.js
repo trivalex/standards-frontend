@@ -212,34 +212,9 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
                         (route) => html`
             <a class$="${route.element.id}" href$="${route.element.id}"><li>${route.element.id}</li></a>
         `)}
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
-            <a class$="grid"><li>asd</li></a>
+            <a><li>A</li></a>
+            <a><li>B</li></a>
+            <a><li>C</li></a>
         </nav>
     </app-drawer>
 `;

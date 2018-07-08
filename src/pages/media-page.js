@@ -116,6 +116,7 @@ class MediaPage extends connect(store)(Dependant(UiPage(LitElement))) {
             }
         </style>
         <div class="content">
+            <a target="_blank" href="https://github.com/tvdtb/microservice-gallery"><h2>microservice-gallery</h2></a>
             ${(data)? this.renderFolders(data): this.renderFetchMessage()}
         </div>
         <anime-animated-pages activated activate-event="activateEvent" selected="${selectedImage}" id="views" attr-for-selected="id"

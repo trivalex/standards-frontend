@@ -1,6 +1,6 @@
 {
-  "name": "shell-app",
-  "short_name": "shell-app",
+  "name": "tvd-web",
+  "short_name": "tvd-web",
   "description": "#UseThePlatform approach client",
   "start_url": "/",
   "display": "standalone",

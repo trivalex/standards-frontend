@@ -41,8 +41,6 @@ describe('routing tests', function() {
 
   it('the page selector switches pages in a different way', async function() {
     await page.goto(`${appUrl}`);
-    // await page.waitForSelector('shell-app', {visible: true});
-
     // Setup
     await page.evaluate(() => {
       window.deepQuerySelector = function(query) {

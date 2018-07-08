@@ -12,10 +12,6 @@ export const EVENT_ROUTING = 'EVENT_ROUTING';
 
 export const router = (store) => (baseElement) => class extends connect(store)(baseElement) {
 
-    navigate(e) {
-        console.log(e);
-    }
-
     routeCallback(location) {
         store.dispatch(navigate(window.decodeURIComponent(location.pathname)));
     }
