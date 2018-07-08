@@ -29,7 +29,7 @@ class AnimeAnimatedPages extends PolymerElement {
         margin-top: var(--standard-page-top);
       }
     </style>
-    <slot id="pages">
+    <slot name="pages" id="pages">
 
     </slot>
 `;
@@ -62,7 +62,7 @@ class AnimeAnimatedPages extends PolymerElement {
         value: true,
         reflectToAttribute: true
       },
-      activated: {
+      active: {
         type: Boolean,
         value: false,
         reflectToAttribute: true
@@ -80,7 +80,7 @@ class AnimeAnimatedPages extends PolymerElement {
   }
 
   _selectedPageChanged(selected) {
-    if (this.shadowRoot === undefined || this.shadowRoot === null || !this.activated || selected === undefined || selected === "" || selected === " ") {
+    if (this.shadowRoot === undefined || this.shadowRoot === null || !this.active || selected === undefined || !selected) {
       return;
     }
 
@@ -148,16 +148,18 @@ class AnimeAnimatedPages extends PolymerElement {
   }
 
   _animateEntry(entryPage, animation) {
-    entryPage.setAttribute("anime-current-page", true);
-    entryPage.style.display = "block";
-    let a = anime(animation(entryPage, this.routeOutDuration, this.routeDebounce)).finished;
-    a.then(() => {
-      entryPage.transitionInCallback();
-      this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
-        bubbles: true,
-        composed: true
-      }));
-    });
+    if (entryPage !== undefined) {
+      entryPage.setAttribute("anime-current-page", true);
+      entryPage.style.display = "block";
+      let a = anime(animation(entryPage, this.routeOutDuration, this.routeDebounce)).finished;
+      a.then(() => {
+        entryPage.transitionInCallback();
+        this.dispatchEvent(new CustomEvent(EVENT_ANIME_PAGES_TRANSITION_END, {
+          bubbles: true,
+          composed: true
+        }));
+      });
+    }
   }
 
   _animateExit(exitPage, animation) {

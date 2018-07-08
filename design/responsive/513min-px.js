@@ -2,7 +2,7 @@ window.dynamicStyleSpace[2] = `
 @media (min-width: 513px) {
     html {
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
-        --content-max-width: var(--viewport-small);
+        --content-max-width: calc(var(--viewport-xsmall) - var(--gutter-default));
         --gallery-collumns: 1fr 1fr 1fr;
         --notification-min-width: 100%;
         --notification-width: 100%;

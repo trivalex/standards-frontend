@@ -4,6 +4,7 @@ window.dynamicStyleSpace[1] = `
         --icon-button-size: calc(var(--icon-size) + var(--gutter-default));
         --content-max-width: var(--viewport-xsmall);
         --content-margin: 0px;
+        --content-left: 0px;
         --gallery-collumns: 1fr 1fr 1fr;
         --notification-min-width: 100%;
         --notification-width: 100%;
@@ -12,7 +13,6 @@ window.dynamicStyleSpace[1] = `
         --small-card-size: 100px;
         --medium-card-size: calc(200px + var(--gutter-double));
         --large-card-size: calc(300px + var(--gutter-double) + var(--gutter-double));
-        --content-left: 0px;
         --standard-drawer-content-width: calc(var(--standard-drawer-width) - var(--gutter-default));
     }
 }

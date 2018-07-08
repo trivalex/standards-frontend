@@ -27,6 +27,7 @@ import {
 import { EVENT_ANIME_PAGES_TRANSITION_START } from '../../components/anime-animation/anime-animated-pages/anime-animated-pages.js';
 import { EVENT_RAIL_INTERACTIVE, RAIL_SLIGHT_DELAY, EVENT_RAIL_FIRST_PAINT } from '../../components/rail-performance/rail-performance-model';
 import { iconMenu, iconAccount, iconSettings, iconInfo } from './ui-icons';
+import { ScrollbarCSS } from '../../../design/scroll-bar';
 store.addReducers({
     ui
 });
@@ -46,11 +47,11 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         app-header-layout {
             position: absolute;
             height: calc(100% - 200px);
-            overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            height: 100vh;
+            min-height: 100vh;
             width: 100vw;
             z-index: 1000;
+            overflow: hidden;
         }
         app-header[unresolved] {
             opacity: 0;
@@ -164,9 +165,12 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         .grid {
             grid-column: span 1;
         }
+
+        ${ScrollbarCSS}
     </style>
     
     <app-header-layout has-scrolling-region>
+    
         <app-header slot="header" id="header" unresolved="true" condenses shadow reveals effects="waterfall">
             <app-toolbar>
                 <button
@@ -180,19 +184,16 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             </app-toolbar>
         </app-header>
 
-        <slot></slot>
-
-        <anime-animated-pages activated activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="id"
+        <anime-animated-pages active activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="id"
             attrForSelected="a" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY} routeDebounce=0>
-            <slot name="pages" id="pages"></slot>
+            <slot slot="pages" name="pages" id="pages"></slot>
         </anime-animated-pages>
 
     </app-header-layout>
 
     <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}">
         <nav class="drawer-menu">
-            <button
-                on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
+            <button on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
                 title="drawer menu">
                 ${iconMenu}
             </button>
@@ -211,6 +212,34 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
                         (route) => html`
             <a class$="${route.element.id}" href$="${route.element.id}"><li>${route.element.id}</li></a>
         `)}
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
+            <a class$="grid"><li>asd</li></a>
         </nav>
     </app-drawer>
 `;

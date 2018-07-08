@@ -34,19 +34,19 @@ window.renderCss = () => {
 };
 window.dynamicStyleTag.innerHTML = window.dynamicStyleSpace.join();
 export const loadViewportStyles = (event) => {
+    const debounceTiming = 50;
     clearTimeout(window.loadViewportStylesQueue);
     window.loadViewportStylesQueue = setTimeout(() => {
         let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         let lw = "512max-px";
         if (w > 512 && w <= 768) lw = "513min-px";
         if (w > 768 && w <= 1200) lw = "769min-px";
         if (w > 1200 && w <= 1800) lw = "1201min-px";
         if (w > 1800) lw = "1801min-px";
         /* jshint ignore:start */
-        import(`../../design/responsive/${lw}.js`).then(() => {});
+        import(`../../design/responsive/${lw}.js`);
         /* jshint ignore:end */
-    }, 10);
+    }, debounceTiming);
 };
 window.onresize = loadViewportStyles;
 window.onresize();
