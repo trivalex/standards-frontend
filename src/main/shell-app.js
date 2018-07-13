@@ -31,6 +31,8 @@ class ShellApp extends HTMLElement {
       <ui-root id="ui-root">
         <media-page class="page" slot="pages" shallFetch id="media"></media-page>
         <grid-page class="page" slot="pages" id="grid"></grid-page>
+        <some-page class="page" slot="pages" id="some"></some-page>
+        <another-page class="page" slot="pages" id="another"></another-page>
       </ui-root>
     </dependency-resolver>`;
     let shadowRoot = this.attachShadow({

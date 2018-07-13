@@ -45,7 +45,7 @@ import {
     ScrollbarCSS
 } from '../../../design/scroll-bar';
 import {
-    updateLayout
+    updateLayout, updateDrawerOpened
 } from './ui-actions';
 store.addReducers({
     ui
@@ -103,48 +103,9 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             --app-drawer-content-container: {
                 background-color: var(--standard-primary-glass-color);
                 height: 100vh;
-                padding: var(--gutter-default) 0px;
                 width: var(--standard-drawer-width);
-                display: grid;
-                grid-template-rows: var(--framed-icon-size) calc(100vh - (var(--framed-icon-size) + (var(--gutter-default) * 4)) );
-                grid-template-columns: var(--standard-drawer-width);
-                grid-gap: var(--gutter-default);
-                font-size: var(--fluid-fontsize-b);
-                text-align: center;
+                padding: 0px;
             };
-        }
-        [unresolved="true"] .drawer-list,
-        [unresolved="true"] .drawer-menu {
-            opacity: 0;
-        }
-        .drawer-menu {
-            display: grid;
-            grid-template-rows: var(--framed-icon-size);
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            grid-gap: var(--gutter-default);
-            padding: 0px var(--gutter-default);
-        }
-        .drawer-menu > * {
-            background: var(--milk-white);
-            line-height: 0;
-        }
-        .drawer-list {
-            border-top: 1px solid var(--milk-white);
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-auto-rows : var(--drawer-card-size);
-            grid-gap: var(--gutter-default);
-            overflow-y: auto;
-            overflow-x: hidden;
-            background: var(--milk-grey);
-            padding: var(--gutter-default);
-        }
-        .drawer-list > a {
-            color: var(--black);
-        }
-        .drawer-list > a:hover {
-            background: var(--standard-primary-color);
-            color: var(--white);
         }
 
         button {
@@ -159,33 +120,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             fill: var(--standard-primary-color);
         }
 
-        .special {
-            grid-column: 5;
-        }
-        li {
-            list-style-type: none;
-        }
-
-        a {
-            color: var(--white);
-            text-decoration: none;
-            outline: 0;
-        }
-
-        .drawer-list a {
-            background: var(--milk-white);
-        }
-        
-        .media {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-        
-        .grid {
-            grid-column: span 1;
-        }
-
-        app-drawer-layout:not([narrow]) [drawer-toggle] {
+        app-drawer-layout:not([narrow]) [title="drawer menu"] {
             display: none;
         }
 
@@ -197,7 +132,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         
             <app-header slot="header" id="header" unresolved="true" condenses shadow reveals effects="waterfall">
                 <app-toolbar>
-                    <button drawer-toggle
+                    <button on-click="${(e) => store.dispatch(updateDrawerOpened(true))}"
                         title="drawer menu">
                     ${iconMenu}
                     </button>
@@ -215,27 +150,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         </app-header-layout>
 
         <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}" slot="drawer">
-            <nav class="drawer-menu">
-                <button drawer-toggle
-                    title="drawer menu">
-                    ${iconMenu}
-                </button>
-                <button>
-                    ${iconAccount}
-                </button>
-                <button>
-                    ${iconSettings}
-                </button>
-                <button class="special">
-                    ${iconInfo}
-                </button>
-            </nav>
-            <nav class="drawer-list">
-            ${ repeat( (routes === undefined || routes === null )? []: routes , 
-                            (route) => html`
-                <a class$="${route.element.id}" href$="${route.element.id}"><li>${route.element.id}</li></a>
-            `)}
-            </nav>
+            <drawer-content routes="${routes}"></drawer-content>
         </app-drawer>
     </app-drawer-layout>
 

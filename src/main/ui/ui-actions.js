@@ -8,7 +8,6 @@ export const updateDrawerOpened = (open) => {
     };
 };
 export const updateLayout = (narrowViewport) => {
-    console.log(narrowViewport);
     return {
         type: UPDATE_NARROW_VIEWPORT,
         narrowViewport
