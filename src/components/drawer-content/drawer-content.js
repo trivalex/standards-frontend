@@ -106,6 +106,10 @@ class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
                 grid-column: span 1;
             }
 
+            .another {
+                grid-column: span 3;
+            }
+
             button {
                 background: var(--milk-white);
                 border: none;
