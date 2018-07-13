@@ -2,7 +2,7 @@
   "name": "tvd-web",
   "short_name": "tvd-web",
   "description": "#UseThePlatform approach client",
-  "start_url": "/",
+  "start_url": "/media",
   "display": "standalone",
   "theme_color": "#ff0000",
   "background_color": "#333",
