@@ -11,7 +11,6 @@
     "src/main/ui/ui-root.js",
     "node_modules/@webcomponents/webcomponentsjs/**/*",
     "node_modules/@webcomponents/shadycss/**/*",
-    "node_modules/@webcomponents/animejs/**/*",
     "src/components/**/*",
     "src/main/routing/**/*",
     "src/main/ui/**/*",
@@ -19,7 +18,9 @@
   ],
   "fragments": [
     "src/pages/media-page.js",
-    "src/pages/grid-page.js"
+    "src/pages/grid-page.js",
+    "src/pages/some-page.js",
+    "src/pages/another-page.js"
   ],
   "builds": [{
     "name": "esm-bundled",
