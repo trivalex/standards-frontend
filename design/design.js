@@ -34,7 +34,7 @@ window.renderCss = () => {
 };
 window.dynamicStyleTag.innerHTML = window.dynamicStyleSpace.join();
 export const loadViewportStyles = (event) => {
-    const debounceTiming = 50;
+    const debounceTiming = 100;
     clearTimeout(window.loadViewportStylesQueue);
     window.loadViewportStylesQueue = setTimeout(() => {
         let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);

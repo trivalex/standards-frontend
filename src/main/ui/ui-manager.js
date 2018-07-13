@@ -81,7 +81,6 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
             width: 100%;
             text-align: center;
             background-color:  var(--standard-primary-glass-color);
-            color: var(--standard-header-text-color);
             border-bottom: 1px solid var(--milk-white);
             min-height: var(--standard-header-height);
             z-index: 2000;
@@ -92,6 +91,7 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
         }
         app-toolbar {
             min-height: var(--standard-header-height);
+            color: var(--standard-light-text-color);
         }
 
         app-drawer {
@@ -109,7 +109,7 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
         button {
             background: var(--milk-white);
             border: none;
-            fill: var(--standard-header-text-color);
+            color: var(--standard-dark-text-color);
             cursor: pointer;
             height: var(--framed-icon-size);
             width: var(--framed-icon-size);
@@ -120,10 +120,6 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
 
         app-drawer-layout:not([narrow]) [title="drawer menu"] {
             display: none;
-        }
-
-        a:visited { 
-            color: white;
         }
 
         ${ScrollbarCSS}
@@ -138,9 +134,7 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
                         title="drawer menu">
                     ${iconMenu}
                     </button>
-                    <a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">
-                        <h4>${APP_TITLE}</h4>
-                    </a>
+                    <h4 condensed-title>${APP_TITLE}</h4>
                 </app-toolbar>
             </app-header>
 

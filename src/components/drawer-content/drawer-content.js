@@ -73,11 +73,11 @@ class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
                 padding: var(--gutter-default);
             }
             .drawer-list > a {
-                color: var(--black);
+                color: var(--standard-dark-text-color);
             }
             .drawer-list > a:hover {
                 background: var(--standard-primary-color);
-                color: var(--white);
+                color: var(--standard-light-text-color);
             }
 
             .special {
@@ -88,7 +88,7 @@ class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
             }
 
             a {
-                color: var(--white);
+                color: var(--standard-light-text-color);
                 text-decoration: none;
                 outline: 0;
             }
@@ -109,7 +109,7 @@ class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
             button {
                 background: var(--milk-white);
                 border: none;
-                fill: var(--standard-header-text-color);
+                fill: var(--standard-dark-text-color);
                 cursor: pointer;
                 height: var(--framed-icon-size);
                 width: var(--framed-icon-size);
