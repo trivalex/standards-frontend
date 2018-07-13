@@ -4,7 +4,7 @@ import {
 } from '@polymer/lit-element';
 import { UiPage } from '../main/ui/UiPage';
 
-class GridView extends UiPage(LitElement) {
+class GridPage extends UiPage(LitElement) {
     _render() {
         return html `
         <style>
@@ -38,4 +38,4 @@ class GridView extends UiPage(LitElement) {
 `;
     }
 }
-customElements.define("grid-page", GridView);
+customElements.define("grid-page", GridPage);

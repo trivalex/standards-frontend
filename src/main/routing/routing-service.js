@@ -10,7 +10,8 @@ import {
 import {
     routes,
     routeSelection
-} from '../routing/routing-reducer';store.addReducers({
+} from '../routing/routing-reducer';
+store.addReducers({
     routes,
     routeSelection
 });

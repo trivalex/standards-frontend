@@ -19,15 +19,34 @@ import {
     connect
 } from 'pwa-helpers/connect-mixin';
 import {
+    installMediaQueryWatcher
+} from 'pwa-helpers/media-query.js';
+import {
     store
-} from '../../main/store';
+} from '../../main/store.js';
 import {
     ui
 } from './ui-reducer';
-import { EVENT_ANIME_PAGES_TRANSITION_START } from '../../components/anime-animation/anime-animated-pages/anime-animated-pages.js';
-import { EVENT_RAIL_INTERACTIVE, RAIL_SLIGHT_DELAY, EVENT_RAIL_FIRST_PAINT } from '../../components/rail-performance/rail-performance-model';
-import { iconMenu, iconAccount, iconSettings, iconInfo } from './ui-icons';
-import { ScrollbarCSS } from '../../../design/scroll-bar';
+import {
+    EVENT_ANIME_PAGES_TRANSITION_START
+} from '../../components/anime-animation/anime-animated-pages/anime-animated-pages.js';
+import {
+    EVENT_RAIL_INTERACTIVE,
+    RAIL_SLIGHT_DELAY,
+    EVENT_RAIL_FIRST_PAINT
+} from '../../components/rail-performance/rail-performance-model';
+import {
+    iconMenu,
+    iconAccount,
+    iconSettings,
+    iconInfo
+} from './ui-icons';
+import {
+    ScrollbarCSS
+} from '../../../design/scroll-bar';
+import {
+    updateLayout
+} from './ui-actions';
 store.addReducers({
     ui
 });
@@ -37,19 +56,23 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
     _render({
         drawerOpened,
         routes,
-        selectedRoute
+        selectedRoute,
+        narrowViewport
     }) {
         return html `
     <style>
         [unresolved="true"] {
             opacity: 0;
         }
+        app-drawer-layout {
+            --app-drawer-width: var(--standard-drawer-width);
+        }
         app-header-layout {
             position: absolute;
             height: calc(100% - 200px);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             z-index: 1000;
             overflow: hidden;
         }
@@ -57,9 +80,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             opacity: 0;
         }
         app-header {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             text-align: center;
             background-color:  var(--standard-primary-glass-color);
@@ -71,7 +91,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             transition-property: opacity;
             transition-duration: .5s;
             font-size:var(--fluid-fontsize-b);
-
         }
         app-toolbar {
             min-height: var(--standard-header-height);
@@ -166,57 +185,60 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             grid-column: span 1;
         }
 
+        app-drawer-layout:not([narrow]) [drawer-toggle] {
+            display: none;
+        }
+
         ${ScrollbarCSS}
     </style>
     
-    <app-header-layout has-scrolling-region>
-    
-        <app-header slot="header" id="header" unresolved="true" condenses shadow reveals effects="waterfall">
-            <app-toolbar>
-                <button
-                    on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
+    <app-drawer-layout forceNarrow="${narrowViewport}">
+        <app-header-layout has-scrolling-region>
+        
+            <app-header slot="header" id="header" unresolved="true" condenses shadow reveals effects="waterfall">
+                <app-toolbar>
+                    <button drawer-toggle
+                        title="drawer menu">
+                    ${iconMenu}
+                    </button>
+                    <a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">
+                        <h4>${APP_TITLE}</h4>
+                    </a>
+                </app-toolbar>
+            </app-header>
+
+            <anime-animated-pages active activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="id"
+                attrForSelected="a" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY} routeDebounce=0>
+                <slot slot="pages" name="pages" id="pages"></slot>
+            </anime-animated-pages>
+
+        </app-header-layout>
+
+        <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}" slot="drawer">
+            <nav class="drawer-menu">
+                <button drawer-toggle
                     title="drawer menu">
-                ${iconMenu}
+                    ${iconMenu}
                 </button>
-                <a condensed-title target="_blank" href="https://github.com/tvdtb/microservice-gallery">
-                    <h4>${APP_TITLE}</h4>
-                </a>
-            </app-toolbar>
-        </app-header>
+                <button>
+                    ${iconAccount}
+                </button>
+                <button>
+                    ${iconSettings}
+                </button>
+                <button class="special">
+                    ${iconInfo}
+                </button>
+            </nav>
+            <nav class="drawer-list">
+            ${ repeat( (routes === undefined || routes === null )? []: routes , 
+                            (route) => html`
+                <a class$="${route.element.id}" href$="${route.element.id}"><li>${route.element.id}</li></a>
+            `)}
+            </nav>
+        </app-drawer>
+    </app-drawer-layout>
 
-        <anime-animated-pages active activate-event="activateEvent" selected="${selectedRoute}" id="views" attr-for-selected="id"
-            attrForSelected="a" routeInDuration=${RAIL_SLIGHT_DELAY} routeOutDuration=${RAIL_SLIGHT_DELAY} routeDebounce=0>
-            <slot slot="pages" name="pages" id="pages"></slot>
-        </anime-animated-pages>
-
-    </app-header-layout>
-
-    <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}">
-        <nav class="drawer-menu">
-            <button on-click="${(e) => this.shadowRoot.getElementById("drawer").toggle()}"
-                title="drawer menu">
-                ${iconMenu}
-            </button>
-            <button>
-                ${iconAccount}
-            </button>
-            <button>
-                ${iconSettings}
-            </button>
-            <button class="special">
-                ${iconInfo}
-            </button>
-        </nav>
-        <nav class="drawer-list">
-        ${ repeat( (routes === undefined || routes === null )? []: routes , 
-                        (route) => html`
-            <a class$="${route.element.id}" href$="${route.element.id}"><li>${route.element.id}</li></a>
-        `)}
-            <a><li>A</li></a>
-            <a><li>B</li></a>
-            <a><li>C</li></a>
-        </nav>
-    </app-drawer>
 `;
     }
 
@@ -235,13 +257,17 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
     connectedCallback() {
         super.connectedCallback();
+
+        installMediaQueryWatcher("(min-width: 1200px)", (matches) => {
+            store.dispatch(updateLayout(!matches));
+        });
+
         /* jshint ignore:start */
         import('../../components/anime-animation/anime-animated-pages/anime-animated-pages.js').then(() => {
             import('./ui-deferred-dependencies.js').then(() => {
                 this.shadowRoot.getElementById("header").removeAttribute("unresolved");
                 this.shadowRoot.getElementById("drawer").removeAttribute("unresolved");
-                import('./ui-navigation-dependencies.js').then(() => {
-                });
+                import('./ui-navigation-dependencies.js');
             });
             this.dispatchEvent(new CustomEvent(EVENT_RAIL_INTERACTIVE, {
                 bubbles: true,
@@ -251,7 +277,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             performance.mark(EVENT_RAIL_INTERACTIVE);
         });
         this.addEventListener(EVENT_ANIME_PAGES_TRANSITION_START, () => {
-            if(this.shadowRoot.getElementById("drawer").close) this.shadowRoot.getElementById("drawer").close();
+            if (this.shadowRoot.getElementById("drawer").close && this.narrowViewport) this.shadowRoot.getElementById("drawer").close();
         });
         /* jshint ignore:end */
         performance.mark('mark_boot_end');
@@ -272,6 +298,9 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         if (newState && newState.ui.drawerOpened !== this.drawerOpened) {
             this.drawerOpened = newState.ui.drawerOpened;
         }
+        if (newState && newState.ui.narrowViewport !== this.narrowViewport) {
+            this.narrowViewport = newState.ui.narrowViewport;
+        }
     }
 
     static get properties() {
@@ -286,7 +315,11 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             selectedRoute: {
                 type: String,
                 value: "a",
-            }
+            },
+            narrowViewport: {
+                type: Boolean,
+                reflectToAttribute: true,
+            },
         };
     }
 }

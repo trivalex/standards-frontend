@@ -8,7 +8,7 @@ window.dynamicStyleSpace[4] = `
         --notification-width: 100%;
         --notification-max-width: calc(var(--gutter-half) * 50);
         --small-card-size: calc(var(--gutter-half) * 20);
-        --medium-card-size: calc(calc(var(--gutter-half) * 40) + var(--gutter-double));
+        --medium-card-size: calc((var(--gutter-half) * 40) + var(--gutter-double));
         --large-card-size: calc(640px + var(--gutter-double) + var(--gutter-double));
     }
 }
