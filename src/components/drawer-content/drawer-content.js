@@ -21,8 +21,9 @@ import {
     repeat
 } from 'lit-html/lib/repeat';
 import { updateDrawerOpened } from '../../main/ui/ui-actions';
+import { UiState } from '../../main/ui/UiState';
 
-class DrawerContent extends connect(store)(Dependant(LitElement)) {
+class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
     _render({
         drawerOpened,
         routes,
@@ -142,39 +143,5 @@ class DrawerContent extends connect(store)(Dependant(LitElement)) {
         </nav>
 `;
     }
-    static get properties() {
-        return {
-            drawerOpened: {
-                type: Boolean,
-                reflectToAttribute: true,
-            },
-            routes: {
-                type: Array,
-            },
-            selectedRoute: {
-                type: String
-            },
-            narrowViewport: {
-                type: Boolean,
-                reflectToAttribute: true,
-            },
-        };
-    }
-
-    _stateChanged(newState) {
-        if (newState && newState.routes && newState.routes.routes.length) {
-            this.routes = newState.routes.routes;
-        }
-        if (newState && newState.routeSelection) {
-            this.selectedRoute = newState.routeSelection.selectedRoute;
-        }
-        if (newState && newState.ui.drawerOpened !== this.drawerOpened) {
-            this.drawerOpened = newState.ui.drawerOpened;
-        }
-        if (newState && newState.ui.narrowViewport !== this.narrowViewport) {
-            this.narrowViewport = newState.ui.narrowViewport;
-        }
-    }
-
 }
 customElements.define("drawer-content", DrawerContent);

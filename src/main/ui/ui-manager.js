@@ -37,9 +37,6 @@ import {
 } from '../../components/rail-performance/rail-performance-model';
 import {
     iconMenu,
-    iconAccount,
-    iconSettings,
-    iconInfo
 } from './ui-icons';
 import {
     ScrollbarCSS
@@ -47,11 +44,12 @@ import {
 import {
     updateLayout, updateDrawerOpened
 } from './ui-actions';
+import { UiState } from './UiState';
 store.addReducers({
     ui
 });
 
-class UiManager extends connect(store)(Dependant(LitElement)) {
+class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
 
     _render({
         drawerOpened,
@@ -196,7 +194,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             performance.mark(EVENT_RAIL_INTERACTIVE);
         });
         this.addEventListener(EVENT_ANIME_PAGES_TRANSITION_START, () => {
-            if (this.shadowRoot.getElementById("drawer").close && this.narrowViewport) this.shadowRoot.getElementById("drawer").close();
+            store.dispatch(updateDrawerOpened(false));
         });
         /* jshint ignore:end */
         performance.mark('mark_boot_end');
@@ -205,41 +203,6 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
 
     disconnectedCallback() {
         this.removeEventListener(EVENT_ANIME_PAGES_TRANSITION_START);
-    }
-
-    _stateChanged(newState) {
-        if (newState && newState.routes && newState.routes.routes.length) {
-            this.routes = newState.routes.routes;
-        }
-        if (newState && newState.routeSelection) {
-            this.selectedRoute = newState.routeSelection.selectedRoute;
-        }
-        if (newState && newState.ui.drawerOpened !== this.drawerOpened) {
-            this.drawerOpened = newState.ui.drawerOpened;
-        }
-        if (newState && newState.ui.narrowViewport !== this.narrowViewport) {
-            this.narrowViewport = newState.ui.narrowViewport;
-        }
-    }
-
-    static get properties() {
-        return {
-            drawerOpened: {
-                type: Boolean,
-                reflectToAttribute: true,
-            },
-            routes: {
-                type: Array,
-            },
-            selectedRoute: {
-                type: String,
-                value: "a",
-            },
-            narrowViewport: {
-                type: Boolean,
-                reflectToAttribute: true,
-            },
-        };
     }
 }
 
