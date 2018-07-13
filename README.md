@@ -8,6 +8,8 @@
 
 # What it is
 
+* LIVE: [https://standards-frontend.firebaseapp.com/](https://standards-frontend.firebaseapp.com/) 
+
 A work in progress PWA, architectured after [#useThePlatform](https://twitter.com/hashtag/usetheplatform?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Ehashtag) or like [Youtube](https://www.youtube.com/)
 
 # What it not is
