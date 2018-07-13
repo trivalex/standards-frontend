@@ -124,6 +124,10 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
             display: none;
         }
 
+        a:visited { 
+            color: white;
+        }
+
         ${ScrollbarCSS}
     </style>
     
@@ -150,7 +154,7 @@ class UiManager extends connect(store)(Dependant(LitElement)) {
         </app-header-layout>
 
         <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}" slot="drawer">
-            <drawer-content routes="${routes}"></drawer-content>
+            <slot name="drawer-content"></slot>
         </app-drawer>
     </app-drawer-layout>
 

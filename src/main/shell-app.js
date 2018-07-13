@@ -29,6 +29,8 @@ class ShellApp extends HTMLElement {
       <mediaresource-service></mediaresource-service>
       <routing-service></routing-service>
       <ui-root id="ui-root">
+        <drawer-content slot="drawer-content"></drawer-content>
+        
         <media-page class="page" slot="pages" shallFetch id="media"></media-page>
         <grid-page class="page" slot="pages" id="grid"></grid-page>
         <some-page class="page" slot="pages" id="some"></some-page>

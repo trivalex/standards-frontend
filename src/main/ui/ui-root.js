@@ -7,6 +7,7 @@ class UiRoot extends HTMLElement {
         return `
     <ui-manager id="ui-manager">
         <slot slot="pages" name="pages" id="pages"></slot>
+        <slot slot="drawer-content" name="drawer-content"></slot>
     </ui-manager>
     `;
     }
