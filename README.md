@@ -14,8 +14,6 @@ A work in progress PWA, architectured after [#useThePlatform](https://twitter.co
 
 Completed
 
-
-
 # Architecture
 
 * [App Shell Architecture](https://developers.google.com/web/fundamentals/architecture/app-shell)
@@ -48,10 +46,10 @@ Completed
 * Requires a local build
 * bash
     * ```npm i -g firebase-tools```
+* bash in project root
     * ```firebase serve```
         * configured in ```firebase.json```
 
 # Deployment
 
 * Contact me :)
-
