@@ -1,5 +1,3 @@
-import '@webcomponents/shadycss/entrypoints/apply-shim.js';
-
 import {
     KeyframesCSS
 } from './keyframes';
