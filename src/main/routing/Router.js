@@ -6,15 +6,12 @@ import {
 } from './Route';
 import {
     addRoute,
-    navigate
 } from './routing-actions';
 export const EVENT_ROUTING = 'EVENT_ROUTING';
 
 export const router = (store) => (baseElement) => class extends connect(store)(baseElement) {
 
-    routeCallback(location) {
-        store.dispatch(navigate(window.decodeURIComponent(location.pathname)));
-    }
+    routeCallback(location) {}
 
     addRouteDataViaElements(elements) {
         if (!Array.isArray(elements)) return;

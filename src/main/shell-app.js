@@ -1,4 +1,8 @@
 export const APP_TITLE = "TVD-Web Standards";
+
+/**
+ * Compositional platform for the application architecture.
+ */
 class ShellApp extends HTMLElement {
   constructor() {
     super();
@@ -25,36 +29,46 @@ class ShellApp extends HTMLElement {
             transition: opacity 0.3s ease-out;
         }
     </style>
+
     <dependency-resolver>
+
       <mediaresource-service></mediaresource-service>
       <routing-service></routing-service>
-      <ui-root id="ui-root">
-        <drawer-content slot="drawer-content"></drawer-content>
+
+      <ui-manager id="ui-manager">
+
+        <drawer-content unresolved slot="drawer-content"></drawer-content>
         
         <media-page class="page" slot="pages" shallFetch id="media"></media-page>
         <grid-page class="page" slot="pages" id="grid"></grid-page>
         <some-page class="page" slot="pages" id="some"></some-page>
         <another-page class="page" slot="pages" id="another"></another-page>
-      </ui-root>
+
+      </ui-manager>
+
     </dependency-resolver>`;
+
     let shadowRoot = this.attachShadow({
       mode: 'open'
     });
 
     shadowRoot.appendChild(tmpl.content.cloneNode(true));
+
     /* jshint ignore:start */
-    import('../components/dependency-resolver/dependency-resolver.js');
-    import('../../design/design.js');
-    import('../main/ui/ui-root.js');
 
     let fp = `../pages/${window.location.pathname.replace('/', '')}-page.js`;
-    import(fp);
+    import(fp).then(() => {
+      import('../components/dependency-resolver/dependency-resolver.js');
+      import('../main/ui/ui-manager.js').then(() => {
+        import('../components/drawer-content/drawer-content.js');
+      });
+    });
     this.removeAttribute('unresolved');
     /* jshint ignore:end */
 
     let path = window.location.pathname.replace('/', '');
     if (path === "") path = "media";
-    const el = this.shadowRoot.getElementById('ui-root').querySelector(`[id="${path}"]`);
+    const el = this.shadowRoot.getElementById('ui-manager').querySelector(`[id="${path}"]`);
     el.style.display = "block";
     el.setAttribute('initial-page', true);
   }

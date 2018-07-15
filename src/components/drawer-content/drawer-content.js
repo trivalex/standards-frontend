@@ -20,10 +20,14 @@ import {
 import {
     repeat
 } from 'lit-html/lib/repeat';
-import { updateDrawerOpened } from '../../main/ui/ui-actions';
-import { UiState } from '../../main/ui/UiState';
+import {
+    updateDrawerOpened
+} from '../../main/ui/ui-actions';
+import {
+    UiState
+} from '../../main/ui/UiState';
 
-class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
+class DrawerContent extends UiState(connect(store)(Dependant(LitElement))) {
     _render({
         drawerOpened,
         routes,
@@ -146,6 +150,11 @@ class DrawerContent extends UiState(connect(store)(Dependant(LitElement)) ){
         `)}
         </nav>
 `;
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.removeAttribute('unresolved');
     }
 }
 customElements.define("drawer-content", DrawerContent);

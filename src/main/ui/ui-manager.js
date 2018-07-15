@@ -49,6 +49,9 @@ store.addReducers({
     ui
 });
 
+/**
+ * Compositional platform for the ui architecture.
+ */
 class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
 
     _render({
@@ -59,7 +62,8 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
     }) {
         return html `
     <style>
-        [unresolved="true"] {
+        [unresolved], [unresolved="true"] {
+            display: none;
             opacity: 0;
         }
         app-drawer-layout {
@@ -145,7 +149,7 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
 
         </app-header-layout>
 
-        <app-drawer id="drawer" swipe-open unresolved="true" opened="${drawerOpened}" slot="drawer">
+        <app-drawer id="drawer" swipe-open unresolved opened="${drawerOpened}" slot="drawer">
             <slot name="drawer-content"></slot>
         </app-drawer>
     </app-drawer-layout>
@@ -177,8 +181,9 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
         import('../../components/anime-animation/anime-animated-pages/anime-animated-pages.js').then(() => {
             import('./ui-deferred-dependencies.js').then(() => {
                 this.shadowRoot.getElementById("header").removeAttribute("unresolved");
-                this.shadowRoot.getElementById("drawer").removeAttribute("unresolved");
-                import('./ui-navigation-dependencies.js');
+                import('./ui-navigation-dependencies.js').then(() => {
+                    this.shadowRoot.getElementById("drawer").removeAttribute("unresolved");
+                });
             });
             this.dispatchEvent(new CustomEvent(EVENT_RAIL_INTERACTIVE, {
                 bubbles: true,
@@ -186,9 +191,6 @@ class UiManager extends UiState(connect(store)(Dependant(LitElement))) {
                 scoped: false
             }));
             performance.mark(EVENT_RAIL_INTERACTIVE);
-        });
-        this.addEventListener(EVENT_ANIME_PAGES_TRANSITION_START, () => {
-            store.dispatch(updateDrawerOpened(false));
         });
         /* jshint ignore:end */
         performance.mark('mark_boot_end');

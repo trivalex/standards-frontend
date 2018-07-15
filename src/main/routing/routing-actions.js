@@ -8,14 +8,12 @@ export const navigate = (path) => (dispatch) => {
 
     // Any other info you might want to extract from the path (like page type),
     // you can do here
-    dispatch(loadPage(page));
+    dispatch(loadPage(page)).then(() => dispatch(updatePage(page)));
 };
 
 /* jshint ignore:start */
 export const loadPage = (page) => async (dispatch) => {
-    import(`../../pages/${page}-page.js`).then(() => {
-        dispatch(updatePage(page));
-    });
+    import(`../../pages/${page}-page.js`);
 }
 
 export const addRoutes = (routes) => {

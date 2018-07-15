@@ -20,6 +20,10 @@ module.exports = {
       handler: 'fastest'
     },
     {
+      urlPattern: /\/@webcomponents\/shadycss\//,
+      handler: 'fastest'
+    },
+    {
       urlPattern: /\/design\//,
       handler: 'fastest'
     },

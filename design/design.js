@@ -26,6 +26,10 @@ ${FontsCSS}
 ${ZIndexCSS}
 ${KeyframesCSS}
 `;
+/** 
+ * Ordered list of media query definitions.
+ * The Order implements CSS specificity.
+ */
 window.dynamicStyleSpace[0] = `html { 
     ${ThemeCSS}
 }`;

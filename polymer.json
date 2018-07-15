@@ -8,12 +8,11 @@
     "manifest.json",
     "design/**/*",
     "src/main/ui/**/*",
-    "src/main/ui/ui-root.js",
+    "src/main/ui/ui-manager.js",
+    "src/main/routing/**/*",
     "node_modules/@webcomponents/webcomponentsjs/**/*",
     "node_modules/@webcomponents/shadycss/**/*",
     "src/components/**/*",
-    "src/main/routing/**/*",
-    "src/main/ui/**/*",
     "push-manifest.json"
   ],
   "fragments": [
