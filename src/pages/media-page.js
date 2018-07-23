@@ -173,7 +173,7 @@ class MediaPage extends connect(store)(Dependant(UiPage(LitElement))) {
                 </div>
             `)}
             ${repeat( r.images ||[], image => html`
-                <div style="--image: url('http://localhost:8080/media/api/browser/alba/default///${image.name}/ICON');" class="tn" on-tap="${() => {console.log('asd');}}"></div>
+                <div style="--image: url('http://localhost:8080/media/api/browser/alba/${data.name}///${image.name}/ICON');" class="tn" on-tap="${() => {console.log('asd');}}"></div>
             `)}
             `;
         }), data => html`
